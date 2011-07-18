@@ -113,9 +113,3 @@ Complete rss object will looks like this:
 
 Resulted rss are valid for w3c rss validator located at http://validator.w3.org/feed/
 
-## ToDo
-
-There is several problems that was not solved yet:
-
-* Internal variables are public, because XmlSerializer can not serialize private/protected/internal properties
-* Some internal variables required for XmlAttribute, because XmlSerializer can not create attribute from object
