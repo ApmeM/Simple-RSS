@@ -3,6 +3,8 @@ namespace RSS.Structure.Validators
     #region Using Directives
 
     using System;
+    using System.Globalization;
+    using System.Xml.Serialization;
 
     using RSS.Exceptions;
 
@@ -19,68 +21,79 @@ namespace RSS.Structure.Validators
 
         #region Constructors and Destructors
 
+        public RssDate()
+        {
+        }
+
         public RssDate(string date)
         {
-            DateTime? newDate = null;
-            if (date != null)
-            {
-                try
-                {
-                    newDate = DateTime.Parse(date);
-                }
-                catch (Exception ex)
-                {
-                    throw new RSSParameterException("date", date, ex);
-                }
-            }
-         
-            this.SetDate(newDate);
+            this.DateString = date;
         }
 
         public RssDate(DateTime? date)
         {
-            this.SetDate(date);
+            this.Date = date;
         }
 
         #endregion
 
         #region Properties
 
+        [XmlText]
         public string DateString
         {
             get
             {
                 return this.dateString;
             }
+
+            set
+            {
+                DateTime? parseDate = null;
+                if (value != null)
+                {
+                    try
+                    {
+                        parseDate = DateTime.ParseExact(value, "R", CultureInfo.InvariantCulture);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new RSSParameterException("date", value, ex);
+                    }
+                }
+
+                this.Date = parseDate;
+            }
         }
 
+        [XmlIgnore]
         public DateTime? Date
         {
             get
             {
                 return this.date;
             }
+
+            set
+            {
+                if (value != null)
+                {
+                    if (value > DateTime.Now)
+                    {
+                        throw new RSSParameterException("newDate", value);
+                    }
+
+                    this.date = value;
+                    this.dateString = this.date.Value.ToString("R");
+                }
+                else
+                {
+                    this.date = null;
+                    this.dateString = null;
+                }
+            }
         }
 
         #endregion
-
-        private void SetDate(DateTime? newDate)
-        {
-            if (newDate != null)
-            {
-                if (newDate > DateTime.Now)
-                {
-                    throw new RSSParameterException("newDate", newDate);
-                }
-
-                this.date = newDate;
-                this.dateString = this.date.Value.ToString("R");
-            }
-            else
-            {
-                this.date = null;
-                this.dateString = null;
-            }
-        }
     }
 }

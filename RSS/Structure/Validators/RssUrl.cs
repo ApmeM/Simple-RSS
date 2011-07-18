@@ -50,7 +50,14 @@
             set
             {
                 this.url = value;
-                this.urlString = this.url.AbsoluteUri;
+                if (this.url == null)
+                {
+                    this.urlString = null;
+                }
+                else
+                {
+                    this.urlString = this.url.AbsoluteUri;
+                }
             }
         }
 
@@ -64,14 +71,17 @@
 
             set
             {
-                Uri parseUrl;
-                try
+                Uri parseUrl = null;
+                if (value != null)
                 {
-                    parseUrl = new Uri(value, UriKind.Absolute);
-                }
-                catch (Exception ex)
-                {
-                    throw new RSSParameterException("url", value, ex);
+                    try
+                    {
+                        parseUrl = new Uri(value, UriKind.Absolute);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new RSSParameterException("url", value, ex);
+                    }
                 }
 
                 this.Url = parseUrl;

@@ -8,7 +8,6 @@
     using System.Xml.Serialization;
 
     using RSS.Enumerators;
-    using RSS.Exceptions;
     using RSS.Structure.Validators;
 
     #endregion
@@ -74,13 +73,42 @@
         public string Description { get; set; }
 
         /// <summary>
+        ///   Gets or sets URL that points to the documentation for the format used in the RSS file. 
+        ///   It's probably a pointer to this page. It's for people who might stumble across 
+        ///   an RSS file on a Web server 25 years from now and wonder what it is.
+        /// </summary>
+        /// <example>
+        ///   http://www.rssboard.org/rss-specification
+        /// </example>
+        [XmlElement("docs", Order = 5)]
+        public string Docs { get; set; }
+
+        /// <summary>
+        ///   Gets or sets a string indicating the program used to generate the channel.
+        /// </summary>
+        /// <example>
+        ///   MightyInHouse Content System v2.3
+        /// </example>
+        [XmlElement("generator", Order = 6)]
+        public string Generator { get; set; }
+
+        /// <summary>
         ///   Gets or sets a GIF, JPEG or PNG image that can be displayed with the channel.
         /// </summary>
         [XmlElement("image", Order = 7)]
         public RssImage Image { get; set; }
 
-        [XmlElement("managingEditor", Order = 11)]
-        public string InternalManagingEditor { get; set; }
+        [XmlElement("language", Order = 8)]
+        public string InternalLanguage { get; set; }
+
+        [XmlElement("lastBuildDate", Order = 9)]
+        public string InternalLastBuildDate { get; set; }
+
+        [XmlElement("pubDate", Order = 12)]
+        public string InternalPubDate { get; set; }
+
+        [XmlElement("ttl", Order = 16)]
+        public string InternalTTL { get; set; }
 
         /// <summary>
         ///   Gets or sets a channel may contain any number of 'item's. An item may represent 
@@ -154,19 +182,8 @@
         /// <example>
         ///   geo@herald.com (George Matesky)
         /// </example>
-        [XmlIgnore]
-        public RssEmail ManagingEditor
-        {
-            get
-            {
-                return new RssEmail(this.InternalManagingEditor);
-            }
-
-            set
-            {
-                this.InternalManagingEditor = value.Email;
-            }
-        }
+        [XmlElement("managingEditor", Order = 11)]
+        public RssEmail ManagingEditor { get; set; }
 
         /// <summary>
         ///   Gets or sets the publication date for the content in the channel. 
@@ -223,36 +240,33 @@
         [XmlArray("skipHours", Order = 15)]
         public List<Hour> SkipHours { get; set; }
 
+        /// <summary>
+        ///   Gets or sets ttl stands for time to live. It's a number of minutes that indicates how 
+        ///   long a channel can be cached before refreshing from the source.
+        /// </summary>
         [XmlIgnore]
         public int TTL
         {
             get
             {
-                return new RssTtl(this.TTLCover).TTL;
+                return new RssTtl(this.InternalTTL).TTL;
             }
 
             set
             {
-                this.TTLCover = new RssTtl(value).TTLString;
+                this.InternalTTL = new RssTtl(value).TTLString;
             }
         }
-
-        /// <summary>
-        ///   Gets or sets ttl stands for time to live. It's a number of minutes that indicates how 
-        ///   long a channel can be cached before refreshing from the source.
-        /// </summary>
-        [XmlElement("ttl", Order = 16)]
-        public string TTLCover { get; set; }
 
         /// <summary>
         ///   Gets or sets a text input box that can be displayed with the channel. OBSOLETE.
         /// </summary>
         [XmlElement("textInput", Order = 17)]
-//        [Obsolete(
-//            @"The RSS specification actively discourages publishers from using the textInput element, calling its purpose ""something of a mystery"" and stating that ""most aggregators ignore it."" Fewer than one percent of surveyed RSS feeds included the element. The only aggregators known to support it are BottomFeeder and Liferea.
-// For this reason, publishers should not expect it to be supported in most aggregators."
-//            )]
-        public RssTextInput TextInput { get; set; }
+        /*        [Obsolete(
+            @"The RSS specification actively discourages publishers from using the textInput element, calling its purpose ""something of a mystery"" and stating that ""most aggregators ignore it."" Fewer than one percent of surveyed RSS feeds included the element. The only aggregators known to support it are BottomFeeder and Liferea.
+ For this reason, publishers should not expect it to be supported in most aggregators."
+            )]*/
+            public RssTextInput TextInput { get; set; }
 
         /// <summary>
         ///   Gets or sets the name of the channel. It's how people refer to your service. 
@@ -272,51 +286,8 @@
         /// <example>
         ///   betty@herald.com (Betty Guernsey)
         /// </example>
-        [XmlIgnore]
-        public RssEmail WebMaster
-        {
-            get
-            {
-                return new RssEmail(this.InternalWebMaster);
-            }
-
-            set
-            {
-                this.InternalWebMaster = value.Email;
-            }
-        }
-
-        /// <summary>
-        ///   Gets or sets URL that points to the documentation for the format used in the RSS file. 
-        ///   It's probably a pointer to this page. It's for people who might stumble across 
-        ///   an RSS file on a Web server 25 years from now and wonder what it is.
-        /// </summary>
-        /// <example>
-        ///   http://www.rssboard.org/rss-specification
-        /// </example>
-        [XmlElement("docs", Order = 5)]
-        public string Docs { get; set; }
-
-        /// <summary>
-        ///   Gets or sets a string indicating the program used to generate the channel.
-        /// </summary>
-        /// <example>
-        ///   MightyInHouse Content System v2.3
-        /// </example>
-        [XmlElement("generator", Order = 6)]
-        public string Generator { get; set; }
-
-        [XmlElement("language", Order = 8)]
-        public string InternalLanguage { get; set; }
-
-        [XmlElement("lastBuildDate", Order = 9)]
-        public string InternalLastBuildDate { get; set; }
-
-        [XmlElement("pubDate", Order = 12)]
-        public string InternalPubDate { get; set; }
-
         [XmlElement("webMaster", Order = 19)]
-        public string InternalWebMaster { get; set; }
+        public RssEmail WebMaster { get; set; }
 
         #endregion
     }

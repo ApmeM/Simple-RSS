@@ -26,19 +26,8 @@
         /// <summary>
         ///   Gets or sets email address of the author of the item.
         /// </summary>
-        [XmlIgnore]
-        public RssEmail Author
-        {
-            get
-            {
-                return new RssEmail(this.InternalAuthor);
-            }
-
-            set
-            {
-                this.InternalAuthor = value.Email;
-            }
-        }
+        [XmlElement("author")]
+        public RssEmail Author { get; set; }
 
         /// <summary>
         ///   Gets or sets includes the item in one or more categories.
@@ -115,10 +104,7 @@
         /// </example>
         [XmlElement("title")]
         public string Title { get; set; }
-
-        [XmlElement("author")]
-        public string InternalAuthor { get; set; }
-
+        
         [XmlElement("pubDate")]
         public string InternalPubDate { get; set; }
 

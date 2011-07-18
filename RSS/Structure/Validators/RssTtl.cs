@@ -3,6 +3,7 @@ namespace RSS.Structure.Validators
     #region Using Directives
 
     using System;
+    using System.Xml.Serialization;
 
     using RSS.Exceptions;
 
@@ -22,67 +23,70 @@ namespace RSS.Structure.Validators
 
         public RssTtl(string ttl)
         {
-            int newTtl = 0;
-            if (ttl != null)
-            {
-                try
-                {
-                    newTtl = int.Parse(ttl);
-                }
-                catch (Exception ex)
-                {
-                    throw new RSSParameterException("ttl", ttl, ex);
-                }
-            }
-
-            this.SetTTL(newTtl);
+            this.TTLString = ttl;
         }
 
         public RssTtl(int ttl)
         {
-            this.SetTTL(ttl);
+            this.TTL = ttl;
         }
 
         #endregion
 
         #region Properties
 
+        [XmlIgnore]
         public int TTL
         {
             get
             {
                 return this.ttl;
             }
+
+            set
+            {
+                if (value < 0)
+                {
+                    throw new RSSParameterException(string.Format("{0}.ttl", this.GetType()), value);
+                }
+
+                if (value != 0)
+                {
+                    this.ttl = value;
+                    this.ttlString = this.ttl.ToString();
+                }
+                else
+                {
+                    this.ttl = 0;
+                    this.ttlString = null;
+                }
+            }
         }
 
+        [XmlText]
         public string TTLString
         {
             get
             {
                 return this.ttlString;
             }
-        }
 
-        #endregion
-
-        #region Methods
-
-        private void SetTTL(int newTtl)
-        {
-            if (newTtl < 0)
+            set
             {
-                throw new RSSParameterException(string.Format("{0}.ttl", this.GetType()), newTtl);
-            }
+                int parseTtl = 0;
+                if (value != null)
+                {
+                    try
+                    {
+                        parseTtl = int.Parse(value);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new RSSParameterException("ttl", value, ex);
+                    }
+                }
 
-            if (newTtl != 0)
-            {
-                this.ttl = newTtl;
-                this.ttlString = this.ttl.ToString();
-            }
-            else
-            {
-                this.ttl = 0;
-                this.ttlString = null;
+                this.TTL = parseTtl;
             }
         }
 
