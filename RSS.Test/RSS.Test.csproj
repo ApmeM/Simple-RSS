@@ -49,6 +49,8 @@
     <Compile Include="RSSHelperTest.cs" />
     <Compile Include="Validators\RssDateTest.cs" />
     <Compile Include="Validators\RssEmailTest.cs" />
+    <Compile Include="Validators\RssTtlTest.cs" />
+    <Compile Include="Validators\RssUrlTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\RSS\RSS.csproj">

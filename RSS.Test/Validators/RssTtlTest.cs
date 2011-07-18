@@ -9,32 +9,32 @@ namespace RSS.Test.Validators
     using RSS.Structure.Validators;
 
     [TestClass]
-    public class RssDateTest
+    public class RssTtlTest
     {
         [TestMethod]
-        public void Ctor_ValidDateParameter_Ok()
+        public void Ctor_ValidTtlParameter_Ok()
         {
             // Arrange
-            DateTime date = DateTime.Now;
+            const int TTL = 10;
 
             // Action
-            RssDate rssDate = new RssDate(date);
+            RssTtl rssTtl = new RssTtl(TTL);
 
             // Assert
-            Assert.AreEqual(date, rssDate.Date);
+            Assert.AreEqual(TTL, rssTtl.TTL);
         }
 
         [TestMethod]
-        public void Ctor_DateInFuture_Error()
+        public void Ctor_TtlLessZero_Error()
         {
             // Arrange
-            DateTime date = DateTime.Now.AddDays(1);
+            const int TTL = -1;
 
             // Action
             RSSParameterException e = null;
             try
             {
-                new RssDate(date);
+                new RssTtl(TTL);
             }
             catch (RSSParameterException ex)
             {
@@ -46,31 +46,31 @@ namespace RSS.Test.Validators
         }
 
         [TestMethod]
-        public void SetDate_ValidDateParameter_Ok()
+        public void SetTtl_ValidTtlParameter_Ok()
         {
             // Arrange
-            RssDate rssDate = new RssDate();
-            DateTime date = DateTime.Now;
+            RssTtl rssTtl = new RssTtl();
+            const int TTL = 10;
 
             // Action
-            rssDate.Date = date;
+            rssTtl.TTL = TTL;
 
             // Assert
-            Assert.AreEqual(date, rssDate.Date);
+            Assert.AreEqual(TTL, rssTtl.TTL);
         }
 
         [TestMethod]
-        public void SetDate_DateInFuture_Error()
+        public void SetTtl_TtlLessZero_Error()
         {
             // Arrange
-            RssDate rssDate = new RssDate();
-            DateTime date = DateTime.Now.AddDays(1);
+            RssTtl rssTtl = new RssTtl();
+            const int TTL = -1;
 
             // Action
             RSSParameterException e = null;
             try
             {
-                rssDate.Date = date;
+                rssTtl.TTL = TTL;
             }
             catch (RSSParameterException ex)
             {
@@ -85,26 +85,26 @@ namespace RSS.Test.Validators
         public void Ctor_ValidStringParameter_Ok()
         {
             // Arrange
-            String date = DateTime.Now.ToString("R");
+            const string TTL = "10";
 
             // Action
-            RssDate rssDate = new RssDate(date);
+            RssTtl rssTtl = new RssTtl(TTL);
 
             // Assert
-            Assert.AreEqual(date, rssDate.DateString);
+            Assert.AreEqual(TTL, rssTtl.TTLString);
         }
 
         [TestMethod]
-        public void Ctor_StringInFuture_Error()
+        public void Ctor_StringLessZero_Error()
         {
             // Arrange
-            String date = DateTime.Now.AddDays(1).ToString("R");
+            const string TTL = "-1";
 
             // Action
             RSSParameterException e = null;
             try
             {
-                new RssDate(date);
+                new RssTtl(TTL);
             }
             catch (RSSParameterException ex)
             {
@@ -119,28 +119,28 @@ namespace RSS.Test.Validators
         public void SetString_ValidStringParameter_Ok()
         {
             // Arrange
-            RssDate rssDate = new RssDate();
-            String date = DateTime.Now.ToString("R");
+            RssTtl rssTtl = new RssTtl();
+            const string TTL = "10";
 
             // Action
-            rssDate.DateString = date;
+            rssTtl.TTLString = TTL;
 
             // Assert
-            Assert.AreEqual(date, rssDate.DateString);
+            Assert.AreEqual(TTL, rssTtl.TTLString);
         }
 
         [TestMethod]
-        public void SetString_StringInFuture_Error()
+        public void SetString_StringLessZero_Error()
         {
             // Arrange
-            RssDate rssDate = new RssDate();
-            String date = DateTime.Now.AddDays(1).ToString("R");
+            RssTtl rssTtl = new RssTtl();
+            const string TTL = "-1";
 
             // Action
             RSSParameterException e = null;
             try
             {
-                rssDate.DateString = date;
+                rssTtl.TTLString = TTL;
             }
             catch (RSSParameterException ex)
             {
@@ -152,71 +152,71 @@ namespace RSS.Test.Validators
         }
 
         [TestMethod]
-        public void SetDate_ConvertToString_String()
+        public void SetTtl_ConvertToString_String()
         {
             // Arrange
-            RssDate rssDate = new RssDate();
-            DateTime date = DateTime.ParseExact(DateTime.Now.ToString("R"), "R", CultureInfo.InvariantCulture);
+            RssTtl rssTtl = new RssTtl();
+            const int TTL = 10;
 
             // Action
-            rssDate.DateString = date.ToString("R");
+            rssTtl.TTLString = TTL.ToString();
 
             // Assert
-            Assert.AreEqual(date, rssDate.Date);
+            Assert.AreEqual(TTL, rssTtl.TTL);
         }
 
         [TestMethod]
-        public void SetString_ConvertToDate_Date()
+        public void SetString_ConvertToTtl_Ttl()
         {
             // Arrange
-            RssDate rssDate = new RssDate();
-            DateTime date = DateTime.Now;
+            RssTtl rssTtl = new RssTtl();
+            const int TTL = 10;
 
             // Action
-            rssDate.Date = date;
+            rssTtl.TTL = TTL;
 
             // Assert
-            Assert.AreEqual(date.ToString("R"), rssDate.DateString);
+            Assert.AreEqual(TTL.ToString(), rssTtl.TTLString);
         }
 
         [TestMethod]
-        public void SetString_Null_DateNull()
+        public void SetString_Null_TtlZero()
         {
             // Arrange
-            RssDate rssDate = new RssDate();
+            RssTtl rssTtl = new RssTtl();
 
             // Action
-            rssDate.DateString = null;
+            rssTtl.TTLString = null;
 
             // Assert
-            Assert.AreEqual(null, rssDate.Date);
+            Assert.AreEqual(0, rssTtl.TTL);
         }
 
         [TestMethod]
-        public void SetDate_Null_StringNull()
+        public void SetTtl_Zero_StringNull()
         {
             // Arrange
-            RssDate rssDate = new RssDate();
+            RssTtl rssTtl = new RssTtl();
 
             // Action
-            rssDate.Date = null;
+            rssTtl.TTL = 0;
 
             // Assert
-            Assert.AreEqual(null, rssDate.DateString);
+            Assert.AreEqual(null, rssTtl.TTLString);
         }
 
         [TestMethod]
-        public void SetString_InvalidDateFormat_Error()
+        public void SetString_InvalidTtlFormat_Error()
         {
             // Arrange
-            RssDate rssDate = new RssDate();
-            const string InvalidDate = "adsfsadf";
+            RssTtl rssTtl = new RssTtl();
+            const string Invalidttl = "adsfsadf";
 
             // Action
             RSSParameterException e = null;
             try
             {
-                rssDate.DateString = InvalidDate;
+                rssTtl.TTLString = Invalidttl;
             }
             catch (RSSParameterException ex)
             {
@@ -228,16 +228,16 @@ namespace RSS.Test.Validators
         }
 
         [TestMethod]
-        public void Ctor_InvalidDateFormat_Error()
+        public void Ctor_InvalidTtlFormat_Error()
         {
             // Arrange
-            const string InvalidDate = "adsfsadf";
+            const string Invalidttl = "adsfsadf";
 
             // Action
             RSSParameterException e = null;
             try
             {
-                new RssDate(InvalidDate);
+                new RssTtl(Invalidttl);
             }
             catch (RSSParameterException ex)
             {

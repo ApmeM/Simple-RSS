@@ -36,14 +36,14 @@
         /// <summary>
         ///   Gets or sets &lt;atom:link href = "http://bash.org.ru/rss/" rel = "self" type = "application/rss+xml" /&gt;
         /// </summary>
-        [XmlElement("link", Namespace = "http://www.w3.org/2005/Atom", Order = 0)]
+        [XmlElement("link", Namespace = "http://www.w3.org/2005/Atom")]
         public RssLink AtomLink { get; set; }
 
         /// <summary>
         ///   Gets or sets one or more categories that the channel belongs to. 
         ///   Follows the same rules as the 'item'-level category element.
         /// </summary>
-        [XmlElement("category", Order = 1)]
+        [XmlElement("category")]
         public string Category { get; set; }
 
         /// <summary>
@@ -51,7 +51,7 @@
         ///   updates to the channel, implementing a lightweight publish-subscribe 
         ///   protocol for RSS feeds.
         /// </summary>
-        [XmlElement("cloud", Order = 2)]
+        [XmlElement("cloud")]
         public RssCloud Cloud { get; set; }
 
         /// <summary>
@@ -60,7 +60,7 @@
         /// <example>
         ///   Copyright 2002, Spartanburg Herald-Journal
         /// </example>
-        [XmlElement("copyright", Order = 3)]
+        [XmlElement("copyright")]
         public string Copyright { get; set; }
 
         /// <summary>
@@ -69,7 +69,7 @@
         /// <example>
         ///   The latest news from GoUpstate.com, a Spartanburg Herald-Journal Web site.
         /// </example>
-        [XmlElement("description", Order = 4)]
+        [XmlElement("description")]
         public string Description { get; set; }
 
         /// <summary>
@@ -80,7 +80,7 @@
         /// <example>
         ///   http://www.rssboard.org/rss-specification
         /// </example>
-        [XmlElement("docs", Order = 5)]
+        [XmlElement("docs")]
         public string Docs { get; set; }
 
         /// <summary>
@@ -89,40 +89,27 @@
         /// <example>
         ///   MightyInHouse Content System v2.3
         /// </example>
-        [XmlElement("generator", Order = 6)]
+        [XmlElement("generator")]
         public string Generator { get; set; }
 
         /// <summary>
         ///   Gets or sets a GIF, JPEG or PNG image that can be displayed with the channel.
         /// </summary>
-        [XmlElement("image", Order = 7)]
+        [XmlElement("image")]
         public RssImage Image { get; set; }
 
-        [XmlElement("language", Order = 8)]
+        [XmlElement("language")]
         public string InternalLanguage { get; set; }
 
-        [XmlElement("lastBuildDate", Order = 9)]
+        [XmlElement("lastBuildDate")]
         public string InternalLastBuildDate { get; set; }
 
-        [XmlElement("pubDate", Order = 12)]
+        [XmlElement("pubDate")]
         public string InternalPubDate { get; set; }
 
-        [XmlElement("ttl", Order = 16)]
+        [XmlElement("ttl")]
         public string InternalTTL { get; set; }
-
-        /// <summary>
-        ///   Gets or sets a channel may contain any number of 'item's. An item may represent 
-        ///   a "story" -- much like a story in a newspaper or magazine; if so its
-        ///   description is a synopsis of the story, and the link points to the full 
-        ///   story. An item may also be complete in itself, if so, the description 
-        ///   contains the text (entity-encoded HTML is allowed; see examples
-        ///   http://www.rssboard.org/rss-encoding-examples), and the link and title may 
-        ///   be omitted. All elements of an item are optional, however at least one of 
-        ///   title or description must be present.
-        /// </summary>
-        [XmlElement("item", Order = 20)]
-        public List<RssItem> Item { get; set; }
-
+        
         /// <summary>
         ///   Gets or sets OPTIONAL the language the channel is written in. This allows aggregators to group all 
         ///   Italian language sites, for example, on a single page. A list of allowable 
@@ -173,7 +160,7 @@
         /// <example>
         ///   http://www.goupstate.com/
         /// </example>
-        [XmlElement("link", Order = 10)]
+        [XmlElement("link")]
         public RssUrl Link { get; set; }
 
         /// <summary>
@@ -182,7 +169,7 @@
         /// <example>
         ///   geo@herald.com (George Matesky)
         /// </example>
-        [XmlElement("managingEditor", Order = 11)]
+        [XmlElement("managingEditor")]
         public RssEmail ManagingEditor { get; set; }
 
         /// <summary>
@@ -215,7 +202,7 @@
         /// <summary>
         ///   Gets or sets the PICS rating for the channel.
         /// </summary>
-        [XmlElement("rating", Order = 13)]
+        [XmlElement("rating")]
         public string Rating { get; set; }
 
         /// <summary>
@@ -226,7 +213,7 @@
         ///   in the 'skipDays' element.
         /// </summary>
         [XmlArrayItem("day")]
-        [XmlArray("skipDays", Order = 14)]
+        [XmlArray("skipDays")]
         public List<Day> SkipDays { get; set; }
 
         /// <summary>
@@ -237,7 +224,7 @@
         ///   in the 'skipHours' element. The hour beginning at midnight is hour zero.
         /// </summary>
         [XmlArrayItem("hour")]
-        [XmlArray("skipHours", Order = 15)]
+        [XmlArray("skipHours")]
         public List<Hour> SkipHours { get; set; }
 
         /// <summary>
@@ -261,7 +248,7 @@
         /// <summary>
         ///   Gets or sets a text input box that can be displayed with the channel. OBSOLETE.
         /// </summary>
-        [XmlElement("textInput", Order = 17)]
+        [XmlElement("textInput")]
         /*        [Obsolete(
             @"The RSS specification actively discourages publishers from using the textInput element, calling its purpose ""something of a mystery"" and stating that ""most aggregators ignore it."" Fewer than one percent of surveyed RSS feeds included the element. The only aggregators known to support it are BottomFeeder and Liferea.
  For this reason, publishers should not expect it to be supported in most aggregators."
@@ -277,7 +264,7 @@
         /// <example>
         ///   http://www.goupstate.com/
         /// </example>
-        [XmlElement("title", Order = 18)]
+        [XmlElement("title")]
         public string Title { get; set; }
 
         /// <summary>
@@ -286,8 +273,21 @@
         /// <example>
         ///   betty@herald.com (Betty Guernsey)
         /// </example>
-        [XmlElement("webMaster", Order = 19)]
+        [XmlElement("webMaster")]
         public RssEmail WebMaster { get; set; }
+
+        /// <summary>
+        ///   Gets or sets a channel may contain any number of 'item's. An item may represent 
+        ///   a "story" -- much like a story in a newspaper or magazine; if so its
+        ///   description is a synopsis of the story, and the link points to the full 
+        ///   story. An item may also be complete in itself, if so, the description 
+        ///   contains the text (entity-encoded HTML is allowed; see examples
+        ///   http://www.rssboard.org/rss-encoding-examples), and the link and title may 
+        ///   be omitted. All elements of an item are optional, however at least one of 
+        ///   title or description must be present.
+        /// </summary>
+        [XmlElement("item")]
+        public List<RssItem> Item { get; set; }
 
         #endregion
     }

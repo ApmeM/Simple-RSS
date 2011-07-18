@@ -1,8 +1,5 @@
 namespace RSS.Test.Validators
 {
-    using System;
-    using System.Globalization;
-
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     using RSS.Exceptions;

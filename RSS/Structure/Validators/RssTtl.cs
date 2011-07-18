@@ -21,6 +21,10 @@ namespace RSS.Structure.Validators
 
         #region Constructors and Destructors
 
+        public RssTtl()
+        {
+        }
+
         public RssTtl(string ttl)
         {
             this.TTLString = ttl;
