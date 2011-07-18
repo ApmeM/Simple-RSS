@@ -28,7 +28,7 @@
 
             set
             {
-                this.InternalUrl = value.Uri;
+                this.InternalUrl = value.UrlString;
             }
         }
 

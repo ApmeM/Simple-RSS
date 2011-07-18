@@ -36,7 +36,7 @@
 
             set
             {
-                this.InternalHref = value.Uri;
+                this.InternalHref = value.UrlString;
             }
         }
 

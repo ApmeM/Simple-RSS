@@ -5,6 +5,8 @@
     using System;
     using System.Xml.Serialization;
 
+    using RSS.Exceptions;
+
     #endregion
 
     public class RssUrl
@@ -12,6 +14,8 @@
         #region Constants and Fields
 
         private Uri url;
+
+        private string urlString;
 
         #endregion
 
@@ -21,31 +25,56 @@
         {
         }
 
-        public RssUrl(string newUri)
+        public RssUrl(string newUrl)
         {
-            this.Uri = newUri;
+            this.UrlString = newUrl;
         }
 
-        public RssUrl(Uri newUri)
+        public RssUrl(Uri newUrl)
         {
-            this.url = newUri;
+            this.Url = newUrl;
         }
 
         #endregion
 
         #region Properties
 
-        [XmlText]
-        public string Uri
+        [XmlIgnore]
+        public Uri Url
         {
             get
             {
-                return this.url.AbsoluteUri;
+                return this.url;
             }
 
             set
             {
-                this.url = new Uri(value, UriKind.Absolute);
+                this.url = value;
+                this.urlString = this.url.AbsoluteUri;
+            }
+        }
+
+        [XmlText]
+        public string UrlString
+        {
+            get
+            {
+                return this.urlString;
+            }
+
+            set
+            {
+                Uri parseUrl;
+                try
+                {
+                    parseUrl = new Uri(value, UriKind.Absolute);
+                }
+                catch (Exception ex)
+                {
+                    throw new RSSParameterException("url", value, ex);
+                }
+
+                this.Url = parseUrl;
             }
         }
 
