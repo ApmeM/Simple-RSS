@@ -5,6 +5,7 @@
     using System.Xml.Serialization;
 
     using RSS.Exceptions;
+    using RSS.Structure.Validators;
 
     #endregion
 
@@ -45,7 +46,7 @@
             {
                 if (this.height > 400)
                 {
-                    throw new RSSParameterException(string.Format("{0}.height", this.GetType()));
+                    throw new RSSParameterException("height", this.height);
                 }
 
                 this.height = value;
@@ -87,7 +88,7 @@
             {
                 if (this.width > 144)
                 {
-                    throw new RSSParameterException(string.Format("{0}.width", this.GetType()));
+                    throw new RSSParameterException("width", this.width);
                 }
 
                 this.width = value;

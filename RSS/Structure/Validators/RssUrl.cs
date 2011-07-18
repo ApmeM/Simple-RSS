@@ -1,4 +1,4 @@
-﻿namespace RSS.Structure
+﻿namespace RSS.Structure.Validators
 {
     #region Using Directives
 

@@ -49,8 +49,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Structure\RssUrl.cs" />
-    <Compile Include="Validators.cs" />
+    <Compile Include="Enumerators\Rel.cs" />
+    <Compile Include="Structure\Validators\RssDate.cs" />
+    <Compile Include="Structure\Validators\RssEmail.cs" />
+    <Compile Include="Structure\Validators\RssUrl.cs" />
     <Compile Include="RSSHelper.cs" />
     <Compile Include="Structure\RssCategory.cs" />
     <Compile Include="Structure\RssCloud.cs" />
@@ -68,6 +70,7 @@
     <Compile Include="Structure\Rss.cs" />
     <Compile Include="Structure\RssSource.cs" />
     <Compile Include="Structure\RssTextInput.cs" />
+    <Compile Include="Structure\Validators\RssTtl.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

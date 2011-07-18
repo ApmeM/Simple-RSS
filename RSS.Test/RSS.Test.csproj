@@ -47,7 +47,6 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RSSHelperTest.cs" />
-    <Compile Include="ValidatorsTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\RSS\RSS.csproj">

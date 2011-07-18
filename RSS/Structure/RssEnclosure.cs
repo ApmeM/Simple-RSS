@@ -4,16 +4,12 @@
 
     using System.Xml.Serialization;
 
+    using RSS.Structure.Validators;
+
     #endregion
 
     public class RssEnclosure
     {
-        #region Constants and Fields
-
-        private readonly RssUrl url = new RssUrl();
-
-        #endregion
-
         #region Properties
 
         /// <summary>
@@ -40,19 +36,22 @@
         /// <example>
         ///   http://www.scripting.com/mp3s/weatherReportSuite.mp3
         /// </example>
-        [XmlAttribute("url")]
-        public string Url
+        [XmlIgnore]
+        public RssUrl Url
         {
             get
             {
-                return this.url.Uri;
+                return new RssUrl(this.InternalUrl);
             }
-
+ 
             set
             {
-                this.url.Uri = value;
+                this.InternalUrl = value.Uri;
             }
         }
+
+        [XmlAttribute("url")]
+        public string InternalUrl { get; set; }
 
         #endregion
     }

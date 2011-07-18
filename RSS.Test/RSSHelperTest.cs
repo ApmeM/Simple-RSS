@@ -12,6 +12,7 @@
 
     using RSS.Enumerators;
     using RSS.Structure;
+    using RSS.Structure.Validators;
 
     #endregion
 
@@ -29,7 +30,7 @@
                     Channel =
                         new RssChannel
                             {
-                                AtomLink = new RssLink { Href = "http://atomlink.com", Rel = "self", Type = "text/plain" },
+                                AtomLink = new RssLink { Href = new RssUrl("http://atomlink.com"), Rel = Rel.self, Type = "text/plain" },
                                 Category = "category",
                                 Cloud =
                                     new RssCloud
@@ -55,7 +56,7 @@
                                 Language = new CultureInfo("en"),
                                 LastBuildDate = DateTime.Now.AddDays(-1),
                                 Link = new RssUrl("http://channel.url.com"),
-                                ManagingEditor = "managingEditor@mail.com (manager)",
+                                ManagingEditor = new RssEmail("managingEditor@mail.com (manager)"),
                                 PubDate = DateTime.Now.AddDays(-1),
                                 Rating = "rating",
                                 SkipDays = new List<Day> { Day.Thursday, Day.Wednesday },
@@ -64,19 +65,19 @@
                                     new RssTextInput
                                         {
                                             Description = "text input desctiption",
-                                            Link = "http://text.input.link.com",
+                                            Link = new RssUrl("http://text.input.link.com"),
                                             Name = "text input name",
                                             Title = "text input title"
                                         },
                                 Title = "channel title",
                                 TTL = 10,
-                                WebMaster = "webmaster@mail.ru (webmaster)",
+                                WebMaster = new RssEmail("webmaster@mail.ru (webmaster)"),
                                 Item =
                                     new List<RssItem>
                                         {
                                             new RssItem
                                                 {
-                                                    Author = "item.author@mail.ru (author)",
+                                                    Author = new RssEmail("item.author@mail.ru (author)"),
                                                     Category =
                                                         new RssCategory
                                                             {
@@ -90,13 +91,13 @@
                                                             {
                                                                 Length = 1234,
                                                                 Type = "text/plain",
-                                                                Url = "http://rss.item.enclosure.type.url.com"
+                                                                Url = new RssUrl("http://rss.item.enclosure.type.url.com")
                                                             },
-                                                    Link = "http://rss.item.link.url.com",
-                                                    PubDate = "Sat, 07 Sep 2002 09:42:31 GMT",
+                                                    Link = new RssUrl("http://rss.item.link.url.com"),
+                                                    PubDate = DateTime.Now.AddDays(-1),
                                                     Title = "item title",
                                                     Guid = new RssGuid { IsPermaLink = false, Value = "guid value" },
-                                                    Source = new RssSource { Url = "http://rss.item.source.url.com" }
+                                                    Source = new RssSource { Url = new RssUrl("http://rss.item.source.url.com") }
                                                 }
                                         }
                             }

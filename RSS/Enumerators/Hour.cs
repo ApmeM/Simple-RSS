@@ -43,7 +43,7 @@
             {
                 if (value < 0 || value > 23)
                 {
-                    throw new RSSParameterException(string.Format("{0}.value", this.GetType()));
+                    throw new RSSParameterException("hour", value);
                 }
 
                 this.value = value;

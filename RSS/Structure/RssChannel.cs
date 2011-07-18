@@ -9,6 +9,7 @@
 
     using RSS.Enumerators;
     using RSS.Exceptions;
+    using RSS.Structure.Validators;
 
     #endregion
 
@@ -18,14 +19,6 @@
     /// </summary>
     public class RssChannel
     {
-        #region Constants and Fields
-
-        private string managingEditor;
-        
-        private string webMaster;
-
-        #endregion
-
         #region Constructors and Destructors
 
         public RssChannel()
@@ -81,32 +74,13 @@
         public string Description { get; set; }
 
         /// <summary>
-        ///   Gets or sets URL that points to the documentation for the format used in the RSS file. 
-        ///   It's probably a pointer to this page. It's for people who might stumble across 
-        ///   an RSS file on a Web server 25 years from now and wonder what it is.
-        ///   ToDo: make it readonly!
-        /// </summary>
-        /// <example>
-        ///   http://www.rssboard.org/rss-specification
-        /// </example>
-        [XmlElement("docs", Order = 5)]
-        public string Docs { get; set; }
-
-        /// <summary>
-        ///   Gets or sets a string indicating the program used to generate the channel.
-        ///   ToDo: make it readonly!
-        /// </summary>
-        /// <example>
-        ///   MightyInHouse Content System v2.3
-        /// </example>
-        [XmlElement("generator", Order = 6)]
-        public string Generator { get; set; }
-
-        /// <summary>
         ///   Gets or sets a GIF, JPEG or PNG image that can be displayed with the channel.
         /// </summary>
         [XmlElement("image", Order = 7)]
         public RssImage Image { get; set; }
+
+        [XmlElement("managingEditor", Order = 11)]
+        public string InternalManagingEditor { get; set; }
 
         /// <summary>
         ///   Gets or sets a channel may contain any number of 'item's. An item may represent 
@@ -121,20 +95,6 @@
         [XmlElement("item", Order = 20)]
         public List<RssItem> Item { get; set; }
 
-        [XmlIgnore]
-        public CultureInfo Language
-        {
-            get
-            {
-                return new CultureInfo(this.LanguageCover);
-            }
-
-            set
-            {
-                this.LanguageCover = value.Name;
-            }
-        }
-
         /// <summary>
         ///   Gets or sets OPTIONAL the language the channel is written in. This allows aggregators to group all 
         ///   Italian language sites, for example, on a single page. A list of allowable 
@@ -145,31 +105,17 @@
         /// <example>
         ///   en-us
         /// </example>
-        [XmlElement("language", Order = 8)]
-        public string LanguageCover { get; set; }
-
         [XmlIgnore]
-        public DateTime? LastBuildDate
+        public CultureInfo Language
         {
             get
             {
-                if (this.LastBuildDateCover == null)
-                {
-                    return null;
-                }
-
-                return DateTime.Parse(this.LastBuildDateCover);
+                return new CultureInfo(this.InternalLanguage);
             }
 
             set
             {
-                if (value == null)
-                {
-                    this.LastBuildDateCover = null;
-                    return;
-                }
-
-                this.LastBuildDateCover = value.Value.ToString("R");
+                this.InternalLanguage = value.Name;
             }
         }
 
@@ -179,8 +125,19 @@
         /// <example>
         ///   Sat, 07 Sep 2002 09:42:31 GMT
         /// </example>
-        [XmlElement("lastBuildDate", Order = 9)]
-        public string LastBuildDateCover { get; set; }
+        [XmlIgnore]
+        public DateTime? LastBuildDate
+        {
+            get
+            {
+                return new RssDate(this.InternalLastBuildDate).Date;
+            }
+
+            set
+            {
+                this.InternalLastBuildDate = new RssDate(value).DateString;
+            }
+        }
 
         /// <summary>
         ///   Gets or sets the URL to the HTML website corresponding to the channel.
@@ -197,47 +154,17 @@
         /// <example>
         ///   geo@herald.com (George Matesky)
         /// </example>
-        [XmlElement("managingEditor", Order = 11)]
-        public string ManagingEditor
-        {
-            get
-            {
-                return this.managingEditor;
-            }
-
-            set
-            {
-                if (!Validators.Emailvalidator(value))
-                {
-                    throw new RSSParameterException(string.Format("{0}.managingEditor", this.GetType()));
-                }
-
-                this.managingEditor = value;
-            }
-        }
-
         [XmlIgnore]
-        public DateTime? PubDate
+        public RssEmail ManagingEditor
         {
             get
             {
-                if (this.PubDateCover == null)
-                {
-                    return null;
-                }
-
-                return DateTime.Parse(this.PubDateCover);
+                return new RssEmail(this.InternalManagingEditor);
             }
 
             set
             {
-                if (value == null)
-                {
-                    this.PubDateCover = null;
-                    return;
-                }
-
-                this.PubDateCover = value.Value.ToString("R");
+                this.InternalManagingEditor = value.Email;
             }
         }
 
@@ -254,8 +181,19 @@
         /// <example>
         ///   Sat, 07 Sep 2002 00:00:01 GMT
         /// </example>
-        [XmlElement("pubDate", Order = 12)]
-        public string PubDateCover { get; set; }
+        [XmlIgnore]
+        public DateTime? PubDate
+        {
+            get
+            {
+                return new RssDate(this.InternalPubDate).Date;
+            }
+
+            set
+            {
+                this.InternalPubDate = new RssDate(value).DateString;
+            }
+        }
 
         /// <summary>
         ///   Gets or sets the PICS rating for the channel.
@@ -285,6 +223,20 @@
         [XmlArray("skipHours", Order = 15)]
         public List<Hour> SkipHours { get; set; }
 
+        [XmlIgnore]
+        public int TTL
+        {
+            get
+            {
+                return new RssTtl(this.TTLCover).TTL;
+            }
+
+            set
+            {
+                this.TTLCover = new RssTtl(value).TTLString;
+            }
+        }
+
         /// <summary>
         ///   Gets or sets ttl stands for time to live. It's a number of minutes that indicates how 
         ///   long a channel can be cached before refreshing from the source.
@@ -292,41 +244,14 @@
         [XmlElement("ttl", Order = 16)]
         public string TTLCover { get; set; }
 
-        [XmlIgnore]
-        public int TTL
-        {
-            get
-            {
-                if (this.TTLCover == null)
-                {
-                    return 0;
-                }
-
-                return int.Parse(this.TTLCover);
-            }
-
-            set
-            {
-                if (value < 0)
-                {
-                    throw new RSSParameterException(string.Format("{0}.ttl", this.GetType()));
-                }
-
-                if (value == 0)
-                {
-                    this.TTLCover = null;
-                }
-
-                this.TTLCover = value.ToString();
-            }
-        }
-
         /// <summary>
         ///   Gets or sets a text input box that can be displayed with the channel. OBSOLETE.
         /// </summary>
         [XmlElement("textInput", Order = 17)]
-        [Obsolete(@"The RSS specification actively discourages publishers from using the textInput element, calling its purpose ""something of a mystery"" and stating that ""most aggregators ignore it."" Fewer than one percent of surveyed RSS feeds included the element. The only aggregators known to support it are BottomFeeder and Liferea.
- For this reason, publishers should not expect it to be supported in most aggregators.")]
+//        [Obsolete(
+//            @"The RSS specification actively discourages publishers from using the textInput element, calling its purpose ""something of a mystery"" and stating that ""most aggregators ignore it."" Fewer than one percent of surveyed RSS feeds included the element. The only aggregators known to support it are BottomFeeder and Liferea.
+// For this reason, publishers should not expect it to be supported in most aggregators."
+//            )]
         public RssTextInput TextInput { get; set; }
 
         /// <summary>
@@ -347,24 +272,51 @@
         /// <example>
         ///   betty@herald.com (Betty Guernsey)
         /// </example>
-        [XmlElement("webMaster", Order = 19)]
-        public string WebMaster
+        [XmlIgnore]
+        public RssEmail WebMaster
         {
             get
             {
-                return this.webMaster;
+                return new RssEmail(this.InternalWebMaster);
             }
 
             set
             {
-                if (!Validators.Emailvalidator(value))
-                {
-                    throw new RSSParameterException(string.Format("{0}.webMaster", this.GetType()));
-                }
-
-                this.webMaster = value;
+                this.InternalWebMaster = value.Email;
             }
         }
+
+        /// <summary>
+        ///   Gets or sets URL that points to the documentation for the format used in the RSS file. 
+        ///   It's probably a pointer to this page. It's for people who might stumble across 
+        ///   an RSS file on a Web server 25 years from now and wonder what it is.
+        /// </summary>
+        /// <example>
+        ///   http://www.rssboard.org/rss-specification
+        /// </example>
+        [XmlElement("docs", Order = 5)]
+        public string Docs { get; set; }
+
+        /// <summary>
+        ///   Gets or sets a string indicating the program used to generate the channel.
+        /// </summary>
+        /// <example>
+        ///   MightyInHouse Content System v2.3
+        /// </example>
+        [XmlElement("generator", Order = 6)]
+        public string Generator { get; set; }
+
+        [XmlElement("language", Order = 8)]
+        public string InternalLanguage { get; set; }
+
+        [XmlElement("lastBuildDate", Order = 9)]
+        public string InternalLastBuildDate { get; set; }
+
+        [XmlElement("pubDate", Order = 12)]
+        public string InternalPubDate { get; set; }
+
+        [XmlElement("webMaster", Order = 19)]
+        public string InternalWebMaster { get; set; }
 
         #endregion
     }

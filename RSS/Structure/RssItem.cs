@@ -5,7 +5,7 @@
     using System;
     using System.Xml.Serialization;
 
-    using RSS.Exceptions;
+    using RSS.Structure.Validators;
 
     #endregion
 
@@ -21,35 +21,22 @@
     /// </summary>
     public class RssItem
     {
-        #region Constants and Fields
-
-        private string author;
-
-        private DateTime? pubDate;
-
-        #endregion
-
         #region Properties
 
         /// <summary>
         ///   Gets or sets email address of the author of the item.
         /// </summary>
-        [XmlElement("author")]
-        public string Author
+        [XmlIgnore]
+        public RssEmail Author
         {
             get
             {
-                return this.author;
+                return new RssEmail(this.InternalAuthor);
             }
 
             set
             {
-                if (!Validators.Emailvalidator(value))
-                {
-                    throw new RSSParameterException(string.Format("{0}.author", this.GetType()));
-                }
-
-                this.author = value;
+                this.InternalAuthor = value.Email;
             }
         }
 
@@ -93,36 +80,24 @@
         /// </summary>
         /// <example>
         ///   http://nytimes.com/2004/12/07FEST.html
-        /// toDo: validator
         /// </example>
         [XmlElement("link")]
-        public string Link { get; set; }
+        public RssUrl Link { get; set; }
 
         /// <summary>
         ///   Gets or sets indicates when the item was published.
-        /// ToDo: convert to datetime
         /// </summary>
-        [XmlElement("pubDate")]
-        public string PubDate
+        [XmlIgnore]
+        public DateTime? PubDate
         {
             get
             {
-                if (this.pubDate == null)
-                {
-                    return null;
-                }
-
-                return ((DateTime)this.pubDate).ToString("R");
+                return new RssDate(this.InternalPubDate).Date;
             }
 
             set
             {
-                if (value == null)
-                {
-                    this.pubDate = null;
-                }
-
-                this.pubDate = DateTime.Parse(value);
+                this.InternalPubDate = new RssDate(value).DateString;
             }
         }
 
@@ -140,6 +115,12 @@
         /// </example>
         [XmlElement("title")]
         public string Title { get; set; }
+
+        [XmlElement("author")]
+        public string InternalAuthor { get; set; }
+
+        [XmlElement("pubDate")]
+        public string InternalPubDate { get; set; }
 
         #endregion
     }

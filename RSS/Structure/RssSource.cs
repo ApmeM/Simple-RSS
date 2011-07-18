@@ -4,6 +4,8 @@
 
     using System.Xml.Serialization;
 
+    using RSS.Structure.Validators;
+
     #endregion
 
     /// <summary>
@@ -14,27 +16,24 @@
     /// </summary>
     public class RssSource
     {
-        #region Constants and Fields
-
-        private readonly RssUrl url = new RssUrl();
-
-        #endregion
-
         #region Properties
 
-        [XmlAttribute("url")]
-        public string Url
+        [XmlIgnore]
+        public RssUrl Url
         {
             get
             {
-                return this.url.Uri;
+                return new RssUrl(this.InternalUrl);
             }
 
             set
             {
-                this.url.Uri = value;
+                this.InternalUrl = value.Uri;
             }
         }
+
+        [XmlAttribute("url")]
+        public string InternalUrl { get; set; }
 
         #endregion
     }

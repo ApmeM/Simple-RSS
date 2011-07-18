@@ -4,51 +4,50 @@
 
     using System.Xml.Serialization;
 
+    using RSS.Enumerators;
+    using RSS.Structure.Validators;
+
     #endregion
 
     /// <summary>
-    ///   &lt;atom:link href = "http://bash.org.ru/rss/" rel = "self" type = "application/rss+xml" /&gt;
+    /// &lt;atom:link href = "http://bash.org.ru/rss/" rel = "self" type = "application/rss+xml" /&gt;
     /// </summary>
     public class RssLink
     {
-        #region Constants and Fields
-
-        private readonly RssUrl href = new RssUrl();
-
-        #endregion
-
         #region Constructors and Destructors
 
         public RssLink()
         {
             this.Type = "application/rss+xml";
-            this.Rel = "self";
+            this.Rel = Rel.self;
         }
 
         #endregion
 
         #region Properties
 
-        [XmlAttribute("href")]
-        public string Href
+        [XmlIgnore]
+        public RssUrl Href
         {
             get
             {
-                return this.href.Uri;
+                return new RssUrl(this.InternalHref);
             }
 
             set
             {
-                this.href.Uri = value;
+                this.InternalHref = value.Uri;
             }
         }
 
-        // ToDo: validator
         [XmlAttribute("rel")]
-        public string Rel { get; set; }
+        public Rel Rel { get; set; }
 
         [XmlAttribute("type")]
         public string Type { get; set; }
+
+        [XmlAttribute("href")]
+        public string InternalHref { get; set; }
 
         #endregion
     }

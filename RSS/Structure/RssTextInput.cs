@@ -4,6 +4,8 @@
 
     using System.Xml.Serialization;
 
+    using RSS.Structure.Validators;
+
     #endregion
 
     /// <summary>
@@ -23,10 +25,9 @@
 
         /// <summary>
         ///   Gets or sets the URL of the CGI script that processes text input requests.
-        ///   ToDo: validator
         /// </summary>
         [XmlElement("link")]
-        public string Link { get; set; }
+        public RssUrl Link { get; set; }
 
         /// <summary>
         ///   Gets or sets the name of the text object in the text input area.
