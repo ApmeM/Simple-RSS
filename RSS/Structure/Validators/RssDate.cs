@@ -54,7 +54,7 @@ namespace RSS.Structure.Validators
                 {
                     try
                     {
-                        parseDate = DateTime.ParseExact(value, "R", CultureInfo.InvariantCulture);
+                        parseDate = DateTime.Parse(value, CultureInfo.InvariantCulture);
                     }
                     catch (Exception ex)
                     {
@@ -64,6 +64,19 @@ namespace RSS.Structure.Validators
 
                 this.Date = parseDate;
             }
+        }
+
+        [XmlText]
+        public string DateStringISO8601
+        {
+            get
+            {
+                return Date.HasValue
+                           ? Date.Value.ToString("yyyy-MM-ddTHH:mm:ss.fK", CultureInfo.InvariantCulture)
+                           : dateString;
+            }
+
+
         }
 
         [XmlIgnore]
