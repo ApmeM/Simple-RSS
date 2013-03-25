@@ -1,4 +1,5 @@
-﻿using System.Xml.Serialization;
+﻿using System.IO;
+using System.Xml.Serialization;
 
 namespace X.Web.RSS.Structure
 {

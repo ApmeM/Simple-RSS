@@ -9,15 +9,8 @@ namespace X.Web.RSS.Structure
     /// </summary>
     public class RssImage
     {
-        #region Constants and Fields
-
-        private int height = 31;
-
-        private int width = 88;
-
-        #endregion
-
-        #region Properties
+        private int _height = 31;
+        private int _width = 88;
 
         /// <summary>
         ///   Gets or sets contains text that is included in the TITLE attribute of the link 
@@ -27,24 +20,38 @@ namespace X.Web.RSS.Structure
         public string Description { get; set; }
 
         /// <summary>
+        ///   Gets or sets optional elements include 'width', numbers, indicating the width of the image in pixels.
+        /// </summary>
+        [XmlElement("width")]
+        public int Width
+        {
+            get { return _width; }
+            set
+            {
+                if (_width > 144)
+                {
+                    throw new RSSParameterException("width", _width);
+                }
+
+                _width = value;
+            }
+        }
+
+        /// <summary>
         ///   Gets or sets optional elements include 'height', numbers, indicating the height of the image in pixels.
         /// </summary>
         [XmlElement("height")]
         public int Height
         {
-            get
-            {
-                return this.height;
-            }
-
+            get { return _height; }
             set
             {
-                if (this.height > 400)
+                if (_height > 400)
                 {
-                    throw new RSSParameterException("height", this.height);
+                    throw new RSSParameterException("height", this._height);
                 }
 
-                this.height = value;
+                _height = value;
             }
         }
 
@@ -67,29 +74,5 @@ namespace X.Web.RSS.Structure
         /// </summary>
         [XmlElement("url")]
         public RssUrl Url { get; set; }
-
-        /// <summary>
-        ///   Gets or sets optional elements include 'width', numbers, indicating the width of the image in pixels.
-        /// </summary>
-        [XmlElement("width")]
-        public int Width
-        {
-            get
-            {
-                return this.width;
-            }
-
-            set
-            {
-                if (this.width > 144)
-                {
-                    throw new RSSParameterException("width", this.width);
-                }
-
-                this.width = value;
-            }
-        }
-
-        #endregion
     }
 }

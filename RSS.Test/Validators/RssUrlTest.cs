@@ -55,7 +55,7 @@ namespace RSS.Test.Validators
         public void SetString_ValidStringParameter_Ok()
         {
             // Arrange
-            RssUrl rssUrl = new RssUrl();
+            var rssUrl = new RssUrl();
             String uri = new Uri("http://test.url.com").ToString();
 
             // Action

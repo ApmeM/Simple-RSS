@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Enumerators\Rel.cs" />
+    <Compile Include="RssDocument.cs" />
     <Compile Include="Structure\Validators\RssDate.cs" />
     <Compile Include="Structure\Validators\RssEmail.cs" />
     <Compile Include="Structure\Validators\RssUrl.cs" />
