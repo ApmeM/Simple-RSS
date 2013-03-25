@@ -1,17 +1,12 @@
-﻿namespace RSS.Structure
+﻿using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Xml.Serialization;
+using X.Web.RSS.Enumerators;
+using X.Web.RSS.Structure.Validators;
+
+namespace X.Web.RSS.Structure
 {
-    #region Using Directives
-
-    using System;
-    using System.Collections.Generic;
-    using System.Globalization;
-    using System.Xml.Serialization;
-
-    using RSS.Enumerators;
-    using RSS.Structure.Validators;
-
-    #endregion
-
     /// <summary>
     /// Subordinate to the 'rss' element is a single 'channel' element, 
     ///   which contains information about the channel (metadata) and its contents.

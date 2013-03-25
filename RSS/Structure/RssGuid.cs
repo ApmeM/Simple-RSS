@@ -1,11 +1,7 @@
-﻿namespace RSS.Structure
+﻿using System.Xml.Serialization;
+
+namespace X.Web.RSS.Structure
 {
-    #region Using Directives
-
-    using System.Xml.Serialization;
-
-    #endregion
-
     /// <summary>
     /// guid stands for globally unique identifier. 
     ///   It's a string that uniquely identifies the item. 

@@ -1,13 +1,8 @@
-﻿namespace RSS.Enumerators
+﻿using X.Web.RSS.Exceptions;
+using System.Xml.Serialization;
+
+namespace X.Web.RSS.Enumerators
 {
-    #region Using Directives
-
-    using System.Xml.Serialization;
-
-    using RSS.Exceptions;
-
-    #endregion
-
     public class Hour
     {
         #region Constants and Fields

@@ -1,12 +1,8 @@
-﻿namespace RSS.Structure
+﻿using System.Xml.Serialization;
+using X.Web.RSS.Structure.Validators;
+
+namespace X.Web.RSS.Structure
 {
-    #region Using Directives
-
-    using System.Xml.Serialization;
-
-    using RSS.Structure.Validators;
-
-    #endregion
 
     /// <summary>
     /// The purpose of the 'textInput' element is something of a mystery. 

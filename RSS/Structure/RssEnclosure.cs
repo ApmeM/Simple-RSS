@@ -1,13 +1,8 @@
-﻿namespace RSS.Structure
+﻿using System.Xml.Serialization;
+using X.Web.RSS.Structure.Validators;
+
+namespace X.Web.RSS.Structure
 {
-    #region Using Directives
-
-    using System.Xml.Serialization;
-
-    using RSS.Structure.Validators;
-
-    #endregion
-
     public class RssEnclosure
     {
         #region Properties

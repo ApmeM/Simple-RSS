@@ -1,14 +1,9 @@
-﻿namespace RSS.Structure
+﻿using System.Xml.Serialization;
+using X.Web.RSS.Enumerators;
+using X.Web.RSS.Structure.Validators;
+
+namespace X.Web.RSS.Structure
 {
-    #region Using Directives
-
-    using System.Xml.Serialization;
-
-    using RSS.Enumerators;
-    using RSS.Structure.Validators;
-
-    #endregion
-
     /// <summary>
     /// &lt;atom:link href = "http://bash.org.ru/rss/" rel = "self" type = "application/rss+xml" /&gt;
     /// </summary>

@@ -1,10 +1,7 @@
-﻿namespace RSS.Structure
+﻿using System.Xml.Serialization;
+
+namespace X.Web.RSS.Structure
 {
-    #region Using Directives
-
-    using System.Xml.Serialization;
-
-    #endregion
 
     /// <summary>
     /// RSS is a Web content syndication format.
@@ -16,17 +13,11 @@
     [XmlRoot("rss")]
     public class Rss
     {
-        #region Constructors and Destructors
-
         public Rss()
         {
             this.Channel = new RssChannel();
             this.Version = "2.0";
         }
-
-        #endregion
-
-        #region Properties
 
         /// <summary>
         ///   Gets or sets subordinate to the 'rss' element is a single 'channel' element, 
@@ -42,7 +33,5 @@
         /// </summary>
         [XmlAttribute("version")]
         public string Version { get; set; }
-
-        #endregion
     }
 }

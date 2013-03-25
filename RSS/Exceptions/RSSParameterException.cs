@@ -1,12 +1,8 @@
-﻿namespace RSS.Exceptions
+﻿using System;
+using System.Runtime.Serialization;
+
+namespace X.Web.RSS.Exceptions
 {
-    #region Using Directives
-
-    using System;
-    using System.Runtime.Serialization;
-
-    #endregion
-
     public class RSSParameterException : Exception
     {
         #region Constants and Fields

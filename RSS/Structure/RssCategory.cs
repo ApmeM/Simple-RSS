@@ -1,11 +1,7 @@
-﻿namespace RSS.Structure
+﻿using System.Xml.Serialization;
+
+namespace X.Web.RSS.Structure
 {
-    #region Using Directives
-
-    using System.Xml.Serialization;
-
-    #endregion
-
     public class RssCategory
     {
         #region Properties

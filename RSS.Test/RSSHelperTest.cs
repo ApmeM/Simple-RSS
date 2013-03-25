@@ -1,22 +1,16 @@
-﻿namespace RSS.Test
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
+using System.Text;
+using X.Web.RSS;
+using X.Web.RSS.Enumerators;
+using X.Web.RSS.Structure;
+using X.Web.RSS.Structure.Validators;
+
+namespace RSS.Test
 {
-    #region Using Directives
-
-    using System;
-    using System.Collections.Generic;
-    using System.Globalization;
-    using System.IO;
-    using System.Net;
-    using System.Text;
-
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-    using RSS.Enumerators;
-    using RSS.Structure;
-    using RSS.Structure.Validators;
-
-    #endregion
-
     [TestClass]
     public class RSSHelperTest
     {

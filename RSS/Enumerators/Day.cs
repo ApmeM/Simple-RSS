@@ -1,4 +1,4 @@
-﻿namespace RSS.Enumerators
+﻿namespace X.Web.RSS.Enumerators
 {
     public enum Day
     {

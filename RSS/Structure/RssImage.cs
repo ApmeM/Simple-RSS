@@ -1,14 +1,9 @@
-﻿namespace RSS.Structure
+﻿using System.Xml.Serialization;
+using X.Web.RSS.Exceptions;
+using X.Web.RSS.Structure.Validators;
+
+namespace X.Web.RSS.Structure
 {
-    #region Using Directives
-
-    using System.Xml.Serialization;
-
-    using RSS.Exceptions;
-    using RSS.Structure.Validators;
-
-    #endregion
-
     /// <summary>
     /// Specifies a GIF, JPEG or PNG image that can be displayed with the channel.
     /// </summary>

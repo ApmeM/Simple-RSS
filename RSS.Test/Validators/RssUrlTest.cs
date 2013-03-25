@@ -1,12 +1,12 @@
+using X.Web.RSS.Exceptions;
+using X.Web.RSS.Structure.Validators;
+
 namespace RSS.Test.Validators
 {
     using System;
     using System.Globalization;
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-    using RSS.Exceptions;
-    using RSS.Structure.Validators;
 
     [TestClass]
     public class RssUrlTest

@@ -53,9 +53,9 @@
     <Compile Include="Validators\RssUrlTest.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\RSS\RSS.csproj">
+    <ProjectReference Include="..\RSS\X.Web.RSS.csproj">
       <Project>{E43F1013-ADC6-45C8-829F-19CCC5C1D91F}</Project>
-      <Name>RSS</Name>
+      <Name>X.Web.RSS</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

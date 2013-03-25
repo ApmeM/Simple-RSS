@@ -1,15 +1,10 @@
-namespace RSS.Structure.Validators
+using System;
+using System.Globalization;
+using System.Xml.Serialization;
+using X.Web.RSS.Exceptions;
+
+namespace X.Web.RSS.Structure.Validators
 {
-    #region Using Directives
-
-    using System;
-    using System.Globalization;
-    using System.Xml.Serialization;
-
-    using RSS.Exceptions;
-
-    #endregion
-
     public class RssDate
     {
         #region Constants and Fields

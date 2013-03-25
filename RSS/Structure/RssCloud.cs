@@ -1,13 +1,8 @@
-﻿namespace RSS.Structure
+﻿using System.Xml.Serialization;
+using X.Web.RSS.Enumerators;
+
+namespace X.Web.RSS.Structure
 {
-    #region Using Directives
-
-    using System.Xml.Serialization;
-
-    using RSS.Enumerators;
-
-    #endregion
-
     /// <summary>
     /// It specifies a web service that supports the rssCloud interface
     ///   which can be implemented in HTTP-POST, XML-RPC or SOAP 1.1.

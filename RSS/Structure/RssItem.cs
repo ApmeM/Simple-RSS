@@ -1,14 +1,9 @@
-﻿namespace RSS.Structure
+﻿using System;
+using System.Xml.Serialization;
+using X.Web.RSS.Structure.Validators;
+
+namespace X.Web.RSS.Structure
 {
-    #region Using Directives
-
-    using System;
-    using System.Xml.Serialization;
-
-    using RSS.Structure.Validators;
-
-    #endregion
-
     /// <summary>
     /// A channel may contain any number of 'item's. An item may represent 
     ///   a "story" -- much like a story in a newspaper or magazine; if so its
@@ -104,7 +99,7 @@
         /// </example>
         [XmlElement("title")]
         public string Title { get; set; }
-        
+
         [XmlElement("pubDate")]
         public string InternalPubDate { get; set; }
 

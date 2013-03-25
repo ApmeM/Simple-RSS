@@ -1,13 +1,8 @@
-﻿namespace RSS.Structure
+﻿using System.Xml.Serialization;
+using X.Web.RSS.Structure.Validators;
+
+namespace X.Web.RSS.Structure
 {
-    #region Using Directives
-
-    using System.Xml.Serialization;
-
-    using RSS.Structure.Validators;
-
-    #endregion
-
     /// <summary>
     /// Its value is the name of the RSS channel that the item came from, derived from its 'title'.
     ///   The purpose of this element is to propagate credit for links, to publicize the sources 
