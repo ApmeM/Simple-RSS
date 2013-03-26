@@ -48,7 +48,6 @@
     <Compile Include="Structure\Validators\RssDate.cs" />
     <Compile Include="Structure\Validators\RssEmail.cs" />
     <Compile Include="Structure\Validators\RssUrl.cs" />
-    <Compile Include="RSSHelper.cs" />
     <Compile Include="Structure\RssCategory.cs" />
     <Compile Include="Structure\RssCloud.cs" />
     <Compile Include="Structure\RssEnclosure.cs" />
@@ -62,7 +61,6 @@
     <Compile Include="Structure\RssGuid.cs" />
     <Compile Include="Structure\RssItem.cs" />
     <Compile Include="Structure\RssLink.cs" />
-    <Compile Include="Structure\Rss.cs" />
     <Compile Include="Structure\RssSource.cs" />
     <Compile Include="Structure\RssTextInput.cs" />
     <Compile Include="Structure\Validators\RssTtl.cs" />

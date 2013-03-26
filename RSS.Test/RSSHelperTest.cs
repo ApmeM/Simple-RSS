@@ -1,9 +1,9 @@
-﻿using System.Net;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.Net;
 using System.Text;
 using X.Web.RSS;
 using X.Web.RSS.Enumerators;
@@ -21,7 +21,7 @@ namespace RSS.Test
             var ms = new MemoryStream();
             var rss = GetFullRss();
 
-            RSSHelper.WriteRSS(rss, ms);
+            RssDocument.WriteRSS(rss, ms);
 
             var result = Encoding.UTF8.GetString(ms.GetBuffer()).Trim('\0');
             Assert.AreEqual(GetFullRssText(), result);
@@ -31,11 +31,11 @@ namespace RSS.Test
         public void WriteRead_LargeObject_Ok()
         {
             var ms = new MemoryStream();
-            Rss rss = GetFullRss();
+            var rss = GetFullRss();
 
-            RSSHelper.WriteRSS(rss, ms);
+            RssDocument.WriteRSS(rss, ms);
             ms.Position = 0;
-            var newRss = RSSHelper.ReadRSS(ms);
+            var newRss = RssDocument.Load(ms);
 
             Assert.AreEqual(rss.Channel.Description, newRss.Channel.Description);
         }
@@ -48,11 +48,10 @@ namespace RSS.Test
             ms.Write(array, 0, array.Length);
             ms.Position = 0;
 
-            Rss rss = RSSHelper.ReadRSS(ms);
+            var rss = RssDocument.Load(ms);
             Assert.AreEqual("channel title", rss.Channel.Title);
             Assert.AreEqual("long description", rss.Channel.Description);
         }
-
 
         [TestMethod]
         public void Test()
@@ -61,16 +60,16 @@ namespace RSS.Test
             var response = request.GetResponse();
             var stream = response.GetResponseStream();
 
-            Rss rss = RSSHelper.ReadRSS(stream);
+            var rss = RssDocument.Load(stream);
 
             Assert.AreEqual("Bash.Org.Ru", rss.Channel.Title);
             Assert.AreEqual("Цитатник Рунета", rss.Channel.Description);
         }
 
 
-        private static Rss GetFullRss()
+        private static RssDocument GetFullRss()
         {
-            return new Rss
+            return new RssDocument
             {
                 Channel =
                     new RssChannel
@@ -117,7 +116,7 @@ namespace RSS.Test
                         Title = "channel title",
                         TTL = 10,
                         WebMaster = new RssEmail("webmaster@mail.ru (webmaster)"),
-                        Item =
+                        Items =
                             new List<RssItem>
                                         {
                                             new RssItem

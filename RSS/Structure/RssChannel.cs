@@ -13,18 +13,14 @@ namespace X.Web.RSS.Structure
     /// </summary>
     public class RssChannel
     {
-        #region Constructors and Destructors
-
         public RssChannel()
         {
-            this.Docs = "http://www.rssboard.org/rss-specification";
-            this.Generator = "ApmeM RSS Generator";
-            this.Item = new List<RssItem>();
-            this.SkipDays = new List<Day>();
-            this.SkipHours = new List<Hour>();
+            Docs = "http://www.rssboard.org/rss-specification";
+            Generator = "ApmeM RSS Generator";
+            Items = new List<RssItem>();
+            SkipDays = new List<Day>();
+            SkipHours = new List<Hour>();
         }
-
-        #endregion
 
         #region Properties
 
@@ -104,7 +100,7 @@ namespace X.Web.RSS.Structure
 
         [XmlElement("ttl")]
         public string InternalTTL { get; set; }
-        
+
         /// <summary>
         ///   Gets or sets OPTIONAL the language the channel is written in. This allows aggregators to group all 
         ///   Italian language sites, for example, on a single page. A list of allowable 
@@ -241,14 +237,10 @@ namespace X.Web.RSS.Structure
         }
 
         /// <summary>
-        ///   Gets or sets a text input box that can be displayed with the channel. OBSOLETE.
+        /// Gets or sets a text input box that can be displayed with the channel. OBSOLETE.
         /// </summary>
         [XmlElement("textInput")]
-        /*        [Obsolete(
-            @"The RSS specification actively discourages publishers from using the textInput element, calling its purpose ""something of a mystery"" and stating that ""most aggregators ignore it."" Fewer than one percent of surveyed RSS feeds included the element. The only aggregators known to support it are BottomFeeder and Liferea.
- For this reason, publishers should not expect it to be supported in most aggregators."
-            )]*/
-            public RssTextInput TextInput { get; set; }
+        public RssTextInput TextInput { get; set; }
 
         /// <summary>
         ///   Gets or sets the name of the channel. It's how people refer to your service. 
@@ -282,7 +274,7 @@ namespace X.Web.RSS.Structure
         ///   title or description must be present.
         /// </summary>
         [XmlElement("item")]
-        public List<RssItem> Item { get; set; }
+        public List<RssItem> Items { get; set; }
 
         #endregion
     }
