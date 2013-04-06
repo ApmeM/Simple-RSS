@@ -8,28 +8,19 @@ All processes are based on XmlSerializer and can be used as an example of how to
 
 ## Usage example
 
-To create rss feed you need to fill necessary fields in `Rss` object and call `RSSHelper.WriteRSS` to any Stream you wish.
-
-    MemoryStream ms = new MemoryStream();
-    Rss rss = GetFullRSS();
-    RSSHelper.WriteRSS(rss, ms);
-    var result = Encoding.UTF8.GetString(ms.GetBuffer()).Trim('\0');
-    Assert.AreEqual(GetFullRSSText(), result);
-
 
 To read foreign rss feed you need to get stream with rss data and call `RSSHelper.ReadRSS`
 
-    var request = WebRequest.Create("http://bash.org.ru/rss/");
+    var request = WebRequest.Create("http://example.com/rss/");
     var response = request.GetResponse();
     var stream = response.GetResponseStream();
-    Rss rss = RSSHelper.ReadRSS(stream);
-    Assert.AreEqual("Bash.Org.Ru", rss.Channel.Title);
+    var rss = RssDocument.Load(stream);
 
 ### RSS object creating example
 
 Complete rss object will looks like this:
 
-    return new Rss
+    return new RssDocument
             {
                 Channel =
                     new RssChannel
@@ -75,13 +66,13 @@ Complete rss object will looks like this:
                             },
                         Title = "channel title",
                         TTL = 10,
-                        WebMaster = new RssEmail("webmaster@mail.ru (webmaster)"),
-                        Item =
+                        WebMaster = new RssEmail("webmaster@mail.example.com (webmaster)"),
+                        Items =
                             new List<RssItem>
                                         {
                                             new RssItem
                                                 {
-                                                    Author = new RssEmail("item.author@mail.ru (author)"),
+                                                    Author = new RssEmail("item.author@mail.example.com (author)"),
                                                     Category =
                                                         new RssCategory
                                                             {
