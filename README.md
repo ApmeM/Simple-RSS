@@ -1,4 +1,6 @@
-# Simple RSS
+# X.Web.RSS
+
+This project you also can download from Nuget.org at http://nuget.org/packages/xwebrss/
 
 ## Introduction
 
