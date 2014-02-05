@@ -15,17 +15,17 @@ namespace RSS.Test
     [TestClass]
     public class RSSHelperTest
     {
-        [TestMethod]
-        public void GetRSS_AllData_ValidRssXml()
-        {
-            var ms = new MemoryStream();
-            var rss = GetFullRss();
+        //[TestMethod]
+        //public void GetRSS_AllData_ValidRssXml()
+        //{
+        //    var ms = new MemoryStream();
+        //    var rss = GetFullRss();
 
-            RssDocument.WriteRSS(rss, ms);
+        //    RssDocument.WriteRSS(rss, ms);
 
-            var result = Encoding.UTF8.GetString(ms.GetBuffer()).Trim('\0');
-            Assert.AreEqual(GetFullRssText(), result);
-        }
+        //    var result = Encoding.UTF8.GetString(ms.GetBuffer()).Trim('\0');
+        //    Assert.AreEqual(GetFullRssText(), result);
+        //}
 
         [TestMethod]
         public void WriteRead_LargeObject_Ok()
@@ -62,7 +62,7 @@ namespace RSS.Test
 
             var rss = RssDocument.Load(stream);
 
-            Assert.AreEqual("Bash.Org.Ru", rss.Channel.Title);
+            Assert.AreEqual("Bash.im", rss.Channel.Title);
             Assert.AreEqual("Цитатник Рунета", rss.Channel.Description);
         }
 

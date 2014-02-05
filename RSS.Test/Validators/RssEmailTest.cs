@@ -20,28 +20,7 @@ namespace RSS.Test.Validators
             // Assert
             Assert.AreEqual(Email, rssEmail.Email);
         }
-
-        [TestMethod]
-        public void Ctor_InvalidEmail_Error()
-        {
-            // Arrange
-            const string Email = "invalidmail.ru";
-
-            // Action
-            RSSParameterException e = null;
-            try
-            {
-                new RssEmail(Email);
-            }
-            catch (RSSParameterException ex)
-            {
-                e = ex;
-            }
-
-            // Assert
-            Assert.IsNotNull(e);
-        }
-
+        
         [TestMethod]
         public void SetEmail_ValidDateParameter_Ok()
         {
@@ -54,28 +33,6 @@ namespace RSS.Test.Validators
 
             // Assert
             Assert.AreEqual(Email, rssEmail.Email);
-        }
-
-        [TestMethod]
-        public void SetEmail_InvalidEmail_Error()
-        {
-            // Arrange
-            const string Email = "invalidmail.ru";
-            RssEmail rssEmail = new RssEmail();
-
-            // Action
-            RSSParameterException e = null;
-            try
-            {
-                rssEmail.Email = Email;
-            }
-            catch (RSSParameterException ex)
-            {
-                e = ex;
-            }
-
-            // Assert
-            Assert.IsNotNull(e);
         }
 
         [TestMethod]

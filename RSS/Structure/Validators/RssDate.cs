@@ -7,30 +7,23 @@ namespace X.Web.RSS.Structure.Validators
 {
     public class RssDate
     {
-        #region Constants and Fields
-
-        private string dateString;
-        private DateTime? date;
-
-        #endregion
-
-        #region Constructors and Destructors
-
+        private DateTime? _date;
+        
         public RssDate()
         {
         }
 
         public RssDate(string date)
         {
-            this.DateString = date;
+            DateString = date;
         }
 
         public RssDate(DateTime? date)
         {
-            this.Date = date;
+            Date = date;
         }
 
-        #endregion
+  
 
         #region Properties
 
@@ -39,17 +32,16 @@ namespace X.Web.RSS.Structure.Validators
         {
             get
             {
-                return this.dateString;
+                return _date.HasValue ? _date.Value.ToString() : String.Empty;
             }
-
             set
             {
                 DateTime? parseDate = null;
-                if (value != null)
+                if (!String.IsNullOrEmpty(value))
                 {
                     try
                     {
-                        parseDate = DateTime.Parse(value, CultureInfo.InvariantCulture);
+                        parseDate = DateTime.Parse(value);
                     }
                     catch (Exception ex)
                     {
@@ -67,11 +59,9 @@ namespace X.Web.RSS.Structure.Validators
             get
             {
                 return Date.HasValue
-                           ? Date.Value.ToString("yyyy-MM-ddTHH:mm:ss.fK", CultureInfo.InvariantCulture)
-                           : dateString;
+                           ? Date.Value.ToString("yyyy-MM-ddTHH:mm:ss.Z", CultureInfo.InvariantCulture)
+                           : DateString;
             }
-
-
         }
 
         [XmlIgnore]
@@ -79,9 +69,8 @@ namespace X.Web.RSS.Structure.Validators
         {
             get
             {
-                return this.date;
+                return _date;
             }
-
             set
             {
                 if (value != null)
@@ -90,15 +79,9 @@ namespace X.Web.RSS.Structure.Validators
                     {
                         throw new RSSParameterException("newDate", value);
                     }
+                }
 
-                    this.date = value;
-                    this.dateString = this.date.Value.ToString("R");
-                }
-                else
-                {
-                    this.date = null;
-                    this.dateString = null;
-                }
+                _date = value;
             }
         }
 

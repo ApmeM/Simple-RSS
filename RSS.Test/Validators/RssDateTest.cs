@@ -1,13 +1,11 @@
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+using System.Globalization;
 using X.Web.RSS.Exceptions;
 using X.Web.RSS.Structure.Validators;
 
 namespace RSS.Test.Validators
 {
-    using System;
-    using System.Globalization;
-
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
-
     [TestClass]
     public class RssDateTest
     {
@@ -15,7 +13,7 @@ namespace RSS.Test.Validators
         public void Ctor_ValidDateParameter_Ok()
         {
             // Arrange
-            DateTime date = DateTime.Now;
+            DateTime date = DateTime.Now.Date;
 
             // Action
             RssDate rssDate = new RssDate(date);
@@ -85,7 +83,7 @@ namespace RSS.Test.Validators
         public void Ctor_ValidStringParameter_Ok()
         {
             // Arrange
-            String date = DateTime.Now.ToString("R");
+            String date = DateTime.Now.Date.ToString();
 
             // Action
             RssDate rssDate = new RssDate(date);
@@ -93,20 +91,6 @@ namespace RSS.Test.Validators
             // Assert
             Assert.AreEqual(date, rssDate.DateString);
         }
-
-        [TestMethod]
-        public void Ctor_ValidStringParameter_WithTimeZone_Ok()
-        {
-            // Arrange
-            String date = DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss.fK");
-
-            // Action
-            RssDate rssDate = new RssDate(date);
-
-            // Assert
-            Assert.AreEqual(date, rssDate.DateStringISO8601);
-        }
-
 
         [TestMethod]
         public void Ctor_StringInFuture_Error()
@@ -134,7 +118,7 @@ namespace RSS.Test.Validators
         {
             // Arrange
             RssDate rssDate = new RssDate();
-            String date = DateTime.Now.ToString("R");
+            String date = DateTime.Now.Date.ToString();
 
             // Action
             rssDate.DateString = date;
@@ -168,12 +152,10 @@ namespace RSS.Test.Validators
         [TestMethod]
         public void SetDate_ConvertToString_String()
         {
-            // Arrange
-            RssDate rssDate = new RssDate();
-            DateTime date = DateTime.ParseExact(DateTime.Now.ToString("R"), "R", CultureInfo.InvariantCulture);
+            DateTime date = DateTime.Now.Date;
 
-            // Action
-            rssDate.DateString = date.ToString("R");
+            RssDate rssDate = new RssDate();
+            rssDate.DateString = date.ToString();
 
             // Assert
             Assert.AreEqual(date, rssDate.Date);
@@ -190,7 +172,7 @@ namespace RSS.Test.Validators
             rssDate.Date = date;
 
             // Assert
-            Assert.AreEqual(date.ToString("R"), rssDate.DateString);
+            Assert.AreEqual(date.ToString(), rssDate.DateString);
         }
 
         [TestMethod]
@@ -216,7 +198,7 @@ namespace RSS.Test.Validators
             rssDate.Date = null;
 
             // Assert
-            Assert.AreEqual(null, rssDate.DateString);
+            Assert.IsTrue(String.IsNullOrEmpty(rssDate.DateString));
         }
 
         [TestMethod]
