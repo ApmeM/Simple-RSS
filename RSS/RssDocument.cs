@@ -9,10 +9,10 @@ namespace X.Web.RSS
 {
     /// <summary>
     /// RSS is a Web content syndication format.
-    ///   Its name is an acronym for Really Simple Syndication.
-    ///   RSS is a dialect of XML. All RSS files must conform to the XML 1.0 specification, 
-    ///   as published on the World Wide Web Consortium (W3C) website.
-    ///   http://www.w3.org/TR/REC-xml
+    /// Its name is an acronym for Really Simple Syndication.
+    /// RSS is a dialect of XML. All RSS files must conform to the XML 1.0 specification, 
+    /// as published on the World Wide Web Consortium (W3C) website.
+    /// http://www.w3.org/TR/REC-xml
     /// </summary>
     [XmlRoot("rss")]
     public class RssDocument
@@ -72,15 +72,12 @@ namespace X.Web.RSS
 
         public static RssDocument Load(string xml)
         {
-            //var stream = new MemoryStream();
-            //var streamWriter = new StreamWriter(stream);
-            //streamWriter.Write(xml);
-            //streamWriter.Flush();
-            //stream.Position = 0;
+            var writer = new StreamWriter(new MemoryStream());
+            writer.Write(xml);
+            writer.Flush();
+            writer.BaseStream.Position = 0;
 
-            var stream = new MemoryStream(Encoding.ASCII.GetBytes(xml));
-
-            var instance = Load(stream);
+            var instance = Load(writer.BaseStream);
             return instance;
         }
 
