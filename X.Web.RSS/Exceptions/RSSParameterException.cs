@@ -32,7 +32,7 @@ namespace X.Web.RSS.Exceptions
         }
 
         protected RSSParameterException(SerializationInfo info, StreamingContext context, string field, object value)
-            : base(info, context)
+            //: base(info, context)
         {
             this.field = field;
             this.value = value;

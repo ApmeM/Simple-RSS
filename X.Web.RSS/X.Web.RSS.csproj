@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard1.6;net461</TargetFrameworks>
+    <Version>2.0.0</Version>
+    <Description>
+      X.Web.Rss is a part of X-Framework library.
+      This library allows you quickly and easily generate a RSS feeds.
+    </Description>
+    <Copyright>Andrew Gubskiy</Copyright>
+    <PackageProjectUrl>https://github.com/ernado-x/X.Web.RSS</PackageProjectUrl>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/ernado-x/X.Web.RSS</RepositoryUrl>
+    <PackageIconUrl>https://ru.gravatar.com/userimage/8071071/f2dc08ee7e4016451f64a7ae9cffd110.png?size=200</PackageIconUrl>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <PackageId>xwebrss</PackageId>
+    <Authors>Andrew Gubskiu</Authors>
+    <Company>.NET Core Ukrainian User Group</Company>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Net.Requests" Version="4.3.0" />
+    <PackageReference Include="System.Xml.XmlDocument" Version="4.3.0" />
+    <PackageReference Include="System.Xml.XmlSerializer" Version="4.3.0" />
+    <PackageReference Include="System.Runtime.Serialization.Primitives" Version="4.3.0" />
+  </ItemGroup>
+
+</Project>

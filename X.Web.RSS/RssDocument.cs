@@ -2,6 +2,7 @@
 using System.IO;
 using System.Net;
 using System.Text;
+using System.Threading.Tasks;
 using System.Xml.Serialization;
 using X.Web.RSS.Structure;
 
@@ -50,7 +51,15 @@ namespace X.Web.RSS
 
             RssDocument.WriteRSS(this, ms);
 
-            var xml = Encoding.UTF8.GetString(ms.GetBuffer()).Trim('\0');
+            //var xml = Encoding.UTF8.GetString(ms.GetBuffer()).Trim('\0');
+            System.ArraySegment<byte> buffer;
+            var xml = String.Empty;
+
+            if (ms.TryGetBuffer(out buffer))
+            {
+                xml = Encoding.UTF8.GetString(buffer.Array).Trim('\0');
+            }
+
             return xml;
         }
 
@@ -59,14 +68,21 @@ namespace X.Web.RSS
         /// </summary>
         /// <param name="url">The URL.</param>
         /// <returns>RssDocument</returns>
-        public static RssDocument Load(Uri url)
+        public static async Task<RssDocument> Load(Uri url)
         {
-            var webClient = new WebClient();
+            var request = WebRequest.Create(url) as HttpWebRequest;
+            var response = await request.GetResponseAsync();
+            
+            var encoding = Encoding.ASCII;
+            var xml = String.Empty;
 
-            var data = webClient.DownloadData(url);
-            var memoryStream = new MemoryStream(data);
+            using (var reader = new System.IO.StreamReader(response.GetResponseStream(), encoding))
+            {
+                xml = reader.ReadToEnd();
+            }
+           
 
-            var rss = Load(memoryStream);
+            var rss = Load(xml);
             return rss;
         }
 
