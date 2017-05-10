@@ -1,4 +1,6 @@
-# X.Web.RSS [![Build status](https://ci.appveyor.com/api/projects/status/26yeb5o0y6d4r77v?svg=true)](https://ci.appveyor.com/project/ernado-x/X.Web.RSS)
+# X.Web.RSS 
+[![Build status](https://ci.appveyor.com/api/projects/status/26yeb5o0y6d4r77v?svg=true)](https://ci.appveyor.com/project/ernado-x/X.Web.RSS)
+[![NuGet version](https://badge.fury.io/nu/xwebrss.svg)](https://badge.fury.io/nu/xwebrss)
 
 This project you also can download from Nuget.org at http://nuget.org/packages/xwebrss/
 
