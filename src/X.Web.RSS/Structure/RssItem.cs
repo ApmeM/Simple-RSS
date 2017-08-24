@@ -91,7 +91,11 @@ namespace X.Web.RSS.Structure
         public string Title { get; set; }
 
         [XmlElement("pubDate")]
-        public string InternalPubDate => PubDate?.ToRFC822Date();
+        public string InternalPubDate
+        {
+            get => PubDate?.ToRFC822Date();
+            set => throw new System.NotSupportedException("Setting this property is not supported");
+        }
 
 
 

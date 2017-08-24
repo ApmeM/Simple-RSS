@@ -23,8 +23,6 @@ namespace X.Web.RSS.Structure
             SkipHours = new List<Hour>();
         }
 
-        #region Properties
-
         /// <summary>
         ///   Gets or sets &lt;atom:link href = "http://bash.org.ru/rss/" rel = "self" type = "application/rss+xml" /&gt;
         /// </summary>
@@ -94,10 +92,18 @@ namespace X.Web.RSS.Structure
         public string InternalLanguage { get; set; }
 
         [XmlElement("lastBuildDate")]
-        public string InternalLastBuildDate => LastBuildDate?.ToRFC822Date();
+        public string InternalLastBuildDate
+        {
+            get => LastBuildDate?.ToRFC822Date();
+            set => throw new System.NotSupportedException("Setting this property is not supported");
+        }
 
         [XmlElement("pubDate")]
-        public string InternalPubDate => PubDate?.ToRFC822Date();
+        public string InternalPubDate
+        {
+            get => PubDate?.ToRFC822Date();
+            set => throw new System.NotSupportedException("Setting this property is not supported");
+        }
 
         [XmlElement("ttl")]
         public string InternalTTL { get; set; }
@@ -115,15 +121,8 @@ namespace X.Web.RSS.Structure
         [XmlIgnore]
         public CultureInfo Language
         {
-            get
-            {
-                return new CultureInfo(this.InternalLanguage);
-            }
-
-            set
-            {
-                this.InternalLanguage = value.Name;
-            }
+            get { return new CultureInfo(this.InternalLanguage); }
+            set { this.InternalLanguage = value.Name; }
         }
 
         /// <summary>
@@ -151,7 +150,15 @@ namespace X.Web.RSS.Structure
         ///   geo@herald.com (George Matesky)
         /// </example>
         [XmlElement("managingEditor")]
-        public RssEmail ManagingEditor { get; set; }
+        //public string ManagingEditor => $"{ManagingEditorEmail?.Email} ({ManagingEditorName})";
+
+        public RssPerson ManagingEditor { get; set; }
+
+        // [XmlIgnore]
+        // public RssEmail ManagingEditorEmail { get; set; }
+
+        // [XmlIgnore]
+        // public string ManagingEditorName { get; set; }
 
         /// <summary>
         ///   Gets or sets the publication date for the content in the channel. 
@@ -186,6 +193,9 @@ namespace X.Web.RSS.Structure
         [XmlArray("skipDays")]
         public List<Day> SkipDays { get; set; }
 
+        [XmlIgnore]
+        public bool SkipDaysSpecified => SkipDays.Count > 0;
+
         /// <summary>
         ///   Gets or sets a hint for aggregators telling them which hours they can skip.
         ///   This element contains up to 24 'hour' sub-elements whose value is
@@ -196,6 +206,9 @@ namespace X.Web.RSS.Structure
         [XmlArrayItem("hour")]
         [XmlArray("skipHours")]
         public List<Hour> SkipHours { get; set; }
+
+        [XmlIgnore]
+        public bool SkipHoursSpecified => SkipHours.Count > 0;
 
         /// <summary>
         ///   Gets or sets ttl stands for time to live. It's a number of minutes that indicates how 
@@ -240,7 +253,8 @@ namespace X.Web.RSS.Structure
         ///   betty@herald.com (Betty Guernsey)
         /// </example>
         [XmlElement("webMaster")]
-        public RssEmail WebMaster { get; set; }
+        //public RssEmail WebMaster { get; set; }
+        public RssPerson WebMaster { get; set; }
 
         /// <summary>
         ///   Gets or sets a channel may contain any number of 'item's. An item may represent 
@@ -254,7 +268,5 @@ namespace X.Web.RSS.Structure
         /// </summary>
         [XmlElement("item")]
         public List<RssItem> Items { get; set; }
-
-        #endregion
     }
 }

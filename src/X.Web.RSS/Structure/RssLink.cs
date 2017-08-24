@@ -9,31 +9,20 @@ namespace X.Web.RSS.Structure
     /// </summary>
     public class RssLink
     {
-        #region Constructors and Destructors
-
         public RssLink()
         {
-            this.Type = "application/rss+xml";
-            this.Rel = Rel.self;
+            Type = "application/rss+xml";
+            Rel = Rel.self;
         }
 
-        #endregion
-
-        #region Properties
+        public RssLink(string url)
+            : this()
+        {
+            InternalHref = url;
+        }
 
         [XmlIgnore]
-        public RssUrl Href
-        {
-            get
-            {
-                return new RssUrl(this.InternalHref);
-            }
-
-            set
-            {
-                this.InternalHref = value.UrlString;
-            }
-        }
+        public RssUrl Href => new RssUrl(InternalHref);
 
         [XmlAttribute("rel")]
         public Rel Rel { get; set; }
@@ -43,7 +32,5 @@ namespace X.Web.RSS.Structure
 
         [XmlAttribute("href")]
         public string InternalHref { get; set; }
-
-        #endregion
     }
 }
