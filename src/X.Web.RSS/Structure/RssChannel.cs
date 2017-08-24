@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Xml.Serialization;
+using X.Web.RSS.Extensions;
 using X.Web.RSS.Enumerators;
 using X.Web.RSS.Structure.Validators;
 
@@ -93,10 +94,10 @@ namespace X.Web.RSS.Structure
         public string InternalLanguage { get; set; }
 
         [XmlElement("lastBuildDate")]
-        public string InternalLastBuildDate { get; set; }
+        public string InternalLastBuildDate => LastBuildDate?.ToRFC822Date();
 
         [XmlElement("pubDate")]
-        public string InternalPubDate { get; set; }
+        public string InternalPubDate => PubDate?.ToRFC822Date();
 
         [XmlElement("ttl")]
         public string InternalTTL { get; set; }
@@ -132,18 +133,7 @@ namespace X.Web.RSS.Structure
         ///   Sat, 07 Sep 2002 09:42:31 GMT
         /// </example>
         [XmlIgnore]
-        public DateTime? LastBuildDate
-        {
-            get
-            {
-                return new RssDate(this.InternalLastBuildDate).Date;
-            }
-
-            set
-            {
-                this.InternalLastBuildDate = new RssDate(value).DateString;
-            }
-        }
+        public DateTime? LastBuildDate { get; set; }
 
         /// <summary>
         ///   Gets or sets the URL to the HTML website corresponding to the channel.
@@ -177,18 +167,7 @@ namespace X.Web.RSS.Structure
         ///   Sat, 07 Sep 2002 00:00:01 GMT
         /// </example>
         [XmlIgnore]
-        public DateTime? PubDate
-        {
-            get
-            {
-                return new RssDate(this.InternalPubDate).Date;
-            }
-
-            set
-            {
-                this.InternalPubDate = new RssDate(value).DateString;
-            }
-        }
+        public DateTime? PubDate { get; set; }
 
         /// <summary>
         ///   Gets or sets the PICS rating for the channel.

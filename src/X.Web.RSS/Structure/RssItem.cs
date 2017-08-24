@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Xml.Serialization;
+using X.Web.RSS.Extensions;
 using X.Web.RSS.Structure.Validators;
 
 namespace X.Web.RSS.Structure
@@ -72,18 +73,7 @@ namespace X.Web.RSS.Structure
         ///   Gets or sets indicates when the item was published.
         /// </summary>
         [XmlIgnore]
-        public DateTime? PubDate
-        {
-            get
-            {
-                return new RssDate(this.InternalPubDate).Date;
-            }
-
-            set
-            {
-                this.InternalPubDate = new RssDate(value).DateString;
-            }
-        }
+        public DateTime? PubDate { get; set; }
 
         /// <summary>
         ///   Gets or sets the RSS channel that the item came from
@@ -101,7 +91,9 @@ namespace X.Web.RSS.Structure
         public string Title { get; set; }
 
         [XmlElement("pubDate")]
-        public string InternalPubDate { get; set; }
+        public string InternalPubDate => PubDate?.ToRFC822Date();
+
+
 
         #endregion
     }
