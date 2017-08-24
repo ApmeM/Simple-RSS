@@ -73,7 +73,7 @@ namespace X.Web.RSS.Tests
                 Channel =
                     new RssChannel
                     {
-                        AtomLink = new RssLink { Href = new RssUrl("http://atomlink.com"), Rel = Rel.self, Type = "text/plain" },
+                        AtomLink = new RssLink("http://atomlink.com") { Rel = Rel.self, Type = "text/plain" },
                         Category = "category",
                         Cloud =
                             new RssCloud
@@ -99,7 +99,7 @@ namespace X.Web.RSS.Tests
                         Language = new CultureInfo("en"),
                         LastBuildDate = new DateTime(2011, 7, 17, 15, 55, 41),
                         Link = new RssUrl("http://channel.url.com"),
-                        ManagingEditor = new RssEmail("managingEditor@mail.com (manager)"),
+                        ManagingEditor = new RssPerson("Manager", "managingEditor@mail.com"),
                         PubDate = new DateTime(2011, 7, 17, 15, 55, 41),
                         Rating = "rating",
                         SkipDays = new List<Day> { Day.Thursday, Day.Wednesday },
@@ -114,7 +114,7 @@ namespace X.Web.RSS.Tests
                             },
                         Title = "channel title",
                         TTL = 10,
-                        WebMaster = new RssEmail("webmaster@mail.ru (webmaster)"),
+                        WebMaster = new RssPerson("webmaster", "webmaster@mail.ru"),
                         Items =
                             new List<RssItem>
                                         {
