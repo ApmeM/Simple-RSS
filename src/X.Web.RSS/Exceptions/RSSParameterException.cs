@@ -5,17 +5,11 @@ namespace X.Web.RSS.Exceptions
 {
     public class RSSParameterException : Exception
     {
-        #region Constants and Fields
-
         private readonly string field;
 
         private readonly object value;
 
         private const string MessageText = "RSSParameterException field '{0}', value '{1}'";
-
-        #endregion
-
-        #region Constructors and Destructors
 
         public RSSParameterException(string field, object value)
             : base(string.Format(MessageText, field, value))
@@ -32,32 +26,20 @@ namespace X.Web.RSS.Exceptions
         }
 
         protected RSSParameterException(SerializationInfo info, StreamingContext context, string field, object value)
-            //: base(info, context)
+        //: base(info, context)
         {
             this.field = field;
             this.value = value;
         }
 
-        #endregion
-
-        #region Properties
-
         public string Field
         {
-            get
-            {
-                return this.field;
-            }
+            get { return this.field; }
         }
 
         public object Value
         {
-            get
-            {
-                return this.value;
-            }
+            get { return this.value; }
         }
-
-        #endregion
     }
 }
