@@ -81,7 +81,6 @@ namespace X.Web.RSS
                 xml = reader.ReadToEnd();
             }
            
-
             var rss = Load(xml);
             return rss;
         }
