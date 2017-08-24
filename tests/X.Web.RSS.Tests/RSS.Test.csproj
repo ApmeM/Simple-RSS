@@ -56,7 +56,7 @@
     <Compile Include="Validators\RssUrlTest.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\X.Web.RSS\X.Web.RSS.csproj">
+    <ProjectReference Include="..\src\X.Web.RSS\X.Web.RSS.csproj">
       <Project>{301677b9-1586-4043-90c3-52a164230723}</Project>
       <Name>X.Web.RSS</Name>
     </ProjectReference>

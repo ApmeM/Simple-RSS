@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26403.7
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RSS.Test", "RSS.Test\RSS.Test.csproj", "{100A2EBB-A674-4CBB-AA97-83811397C676}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "X.Web.RSS.Tests", "tests\X.Web.RSS.Tests\X.Web.RSS.Tests.csproj", "{100A2EBB-A674-4CBB-AA97-83811397C676}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "X.Web.RSS", "X.Web.RSS\X.Web.RSS.csproj", "{301677B9-1586-4043-90C3-52A164230723}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "X.Web.RSS", "src\X.Web.RSS\X.Web.RSS.csproj", "{301677B9-1586-4043-90C3-52A164230723}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
