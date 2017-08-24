@@ -1,17 +1,14 @@
+using System;
+using System.Globalization;
 using X.Web.RSS.Exceptions;
 using X.Web.RSS.Structure.Validators;
+using Xunit;
 
-namespace RSS.Test.Validators
+namespace X.Web.RSS.Tests.Validators
 {
-    using System;
-    using System.Globalization;
-
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-    [TestClass]
     public class RssTtlTest
     {
-        [TestMethod]
+        [Fact]
         public void Ctor_ValidTtlParameter_Ok()
         {
             // Arrange
@@ -21,10 +18,10 @@ namespace RSS.Test.Validators
             RssTtl rssTtl = new RssTtl(TTL);
 
             // Assert
-            Assert.AreEqual(TTL, rssTtl.TTL);
+            Assert.Equal(TTL, rssTtl.TTL);
         }
 
-        [TestMethod]
+        [Fact]
         public void Ctor_TtlLessZero_Error()
         {
             // Arrange
@@ -42,10 +39,10 @@ namespace RSS.Test.Validators
             }
 
             // Assert
-            Assert.IsNotNull(e);
+            Assert.NotNull(e);
         }
 
-        [TestMethod]
+        [Fact]
         public void SetTtl_ValidTtlParameter_Ok()
         {
             // Arrange
@@ -56,10 +53,10 @@ namespace RSS.Test.Validators
             rssTtl.TTL = TTL;
 
             // Assert
-            Assert.AreEqual(TTL, rssTtl.TTL);
+            Assert.Equal(TTL, rssTtl.TTL);
         }
 
-        [TestMethod]
+        [Fact]
         public void SetTtl_TtlLessZero_Error()
         {
             // Arrange
@@ -78,10 +75,10 @@ namespace RSS.Test.Validators
             }
 
             // Assert
-            Assert.IsNotNull(e);
+            Assert.NotNull(e);
         }
 
-        [TestMethod]
+        [Fact]
         public void Ctor_ValidStringParameter_Ok()
         {
             // Arrange
@@ -91,10 +88,10 @@ namespace RSS.Test.Validators
             RssTtl rssTtl = new RssTtl(TTL);
 
             // Assert
-            Assert.AreEqual(TTL, rssTtl.TTLString);
+            Assert.Equal(TTL, rssTtl.TTLString);
         }
 
-        [TestMethod]
+        [Fact]
         public void Ctor_StringLessZero_Error()
         {
             // Arrange
@@ -112,10 +109,10 @@ namespace RSS.Test.Validators
             }
 
             // Assert
-            Assert.IsNotNull(e);
+            Assert.NotNull(e);
         }
 
-        [TestMethod]
+        [Fact]
         public void SetString_ValidStringParameter_Ok()
         {
             // Arrange
@@ -126,10 +123,10 @@ namespace RSS.Test.Validators
             rssTtl.TTLString = TTL;
 
             // Assert
-            Assert.AreEqual(TTL, rssTtl.TTLString);
+            Assert.Equal(TTL, rssTtl.TTLString);
         }
 
-        [TestMethod]
+        [Fact]
         public void SetString_StringLessZero_Error()
         {
             // Arrange
@@ -148,10 +145,10 @@ namespace RSS.Test.Validators
             }
 
             // Assert
-            Assert.IsNotNull(e);
+            Assert.NotNull(e);
         }
 
-        [TestMethod]
+        [Fact]
         public void SetTtl_ConvertToString_String()
         {
             // Arrange
@@ -162,10 +159,10 @@ namespace RSS.Test.Validators
             rssTtl.TTLString = TTL.ToString();
 
             // Assert
-            Assert.AreEqual(TTL, rssTtl.TTL);
+            Assert.Equal(TTL, rssTtl.TTL);
         }
 
-        [TestMethod]
+        [Fact]
         public void SetString_ConvertToTtl_Ttl()
         {
             // Arrange
@@ -176,10 +173,10 @@ namespace RSS.Test.Validators
             rssTtl.TTL = TTL;
 
             // Assert
-            Assert.AreEqual(TTL.ToString(), rssTtl.TTLString);
+            Assert.Equal(TTL.ToString(), rssTtl.TTLString);
         }
 
-        [TestMethod]
+        [Fact]
         public void SetString_Null_TtlZero()
         {
             // Arrange
@@ -189,10 +186,10 @@ namespace RSS.Test.Validators
             rssTtl.TTLString = null;
 
             // Assert
-            Assert.AreEqual(0, rssTtl.TTL);
+            Assert.Equal(0, rssTtl.TTL);
         }
 
-        [TestMethod]
+        [Fact]
         public void SetTtl_Zero_StringNull()
         {
             // Arrange
@@ -202,10 +199,10 @@ namespace RSS.Test.Validators
             rssTtl.TTL = 0;
 
             // Assert
-            Assert.AreEqual(null, rssTtl.TTLString);
+            Assert.Equal(null, rssTtl.TTLString);
         }
 
-        [TestMethod]
+        [Fact]
         public void SetString_InvalidTtlFormat_Error()
         {
             // Arrange
@@ -224,10 +221,10 @@ namespace RSS.Test.Validators
             }
 
             // Assert
-            Assert.IsNotNull(e);
+            Assert.NotNull(e);
         }
 
-        [TestMethod]
+        [Fact]
         public void Ctor_InvalidTtlFormat_Error()
         {
             // Arrange
@@ -245,7 +242,7 @@ namespace RSS.Test.Validators
             }
 
             // Assert
-            Assert.IsNotNull(e);
+            Assert.NotNull(e);
         }
     }
 }

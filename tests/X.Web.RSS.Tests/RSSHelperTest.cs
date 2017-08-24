@@ -1,5 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
@@ -9,13 +8,13 @@ using X.Web.RSS;
 using X.Web.RSS.Enumerators;
 using X.Web.RSS.Structure;
 using X.Web.RSS.Structure.Validators;
+using Xunit;
 
-namespace RSS.Test
+namespace X.Web.RSS.Tests
 {
-    [TestClass]
     public class RSSHelperTest
     {
-        //[TestMethod]
+        //[Fact]
         //public void GetRSS_AllData_ValidRssXml()
         //{
         //    var ms = new MemoryStream();
@@ -24,10 +23,10 @@ namespace RSS.Test
         //    RssDocument.WriteRSS(rss, ms);
 
         //    var result = Encoding.UTF8.GetString(ms.GetBuffer()).Trim('\0');
-        //    Assert.AreEqual(GetFullRssText(), result);
+        //    Assert.Equal(GetFullRssText(), result);
         //}
 
-        [TestMethod]
+        [Fact]
         public void WriteRead_LargeObject_Ok()
         {
             var ms = new MemoryStream();
@@ -37,10 +36,10 @@ namespace RSS.Test
             ms.Position = 0;
             var newRss = RssDocument.Load(ms);
 
-            Assert.AreEqual(rss.Channel.Description, newRss.Channel.Description);
+            Assert.Equal(rss.Channel.Description, newRss.Channel.Description);
         }
 
-        [TestMethod]
+        [Fact]
         public void Read_External_Ok()
         {
             var ms = new MemoryStream();
@@ -49,21 +48,21 @@ namespace RSS.Test
             ms.Position = 0;
 
             var rss = RssDocument.Load(ms);
-            Assert.AreEqual("channel title", rss.Channel.Title);
-            Assert.AreEqual("long description", rss.Channel.Description);
+            Assert.Equal("channel title", rss.Channel.Title);
+            Assert.Equal("long description", rss.Channel.Description);
         }
 
-        [TestMethod]
+        [Fact]
         public void Test()
         {
-            var request = WebRequest.Create("http://bash.im/rss/");
+            var request = WebRequest.Create("https://news.microsoft.com/feed/");
             var response = request.GetResponse();
             var stream = response.GetResponseStream();
 
             var rss = RssDocument.Load(stream);
 
-            Assert.AreEqual("Bash.im", rss.Channel.Title);
-            Assert.AreEqual("Цитатник Рунета", rss.Channel.Description);
+            Assert.Equal("News Center", rss.Channel.Title);
+            Assert.Equal("Microsoft news, features, events, and press materials", rss.Channel.Description);
         }
 
 

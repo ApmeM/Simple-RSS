@@ -1,17 +1,14 @@
+using System;
+using System.Globalization;
 using X.Web.RSS.Exceptions;
 using X.Web.RSS.Structure.Validators;
+using Xunit;
 
-namespace RSS.Test.Validators
+namespace X.Web.RSS.Tests.Validators
 {
-    using System;
-    using System.Globalization;
-
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-    [TestClass]
     public class RssUrlTest
     {
-        [TestMethod]
+        [Fact]
         public void Ctor_ValidUriParameter_Ok()
         {
             // Arrange
@@ -21,10 +18,10 @@ namespace RSS.Test.Validators
             RssUrl rssUrl = new RssUrl(uri);
 
             // Assert
-            Assert.AreEqual(uri, rssUrl.Url);
+            Assert.Equal(uri, rssUrl.Url);
         }
         
-        [TestMethod]
+        [Fact]
         public void SetUri_ValidUriParameter_Ok()
         {
             // Arrange
@@ -35,10 +32,10 @@ namespace RSS.Test.Validators
             rssUrl.Url = uri;
 
             // Assert
-            Assert.AreEqual(uri, rssUrl.Url);
+            Assert.Equal(uri, rssUrl.Url);
         }
         
-        [TestMethod]
+        [Fact]
         public void Ctor_ValidStringParameter_Ok()
         {
             // Arrange
@@ -48,10 +45,10 @@ namespace RSS.Test.Validators
             RssUrl rssUrl = new RssUrl(uri);
 
             // Assert
-            Assert.AreEqual(uri, rssUrl.UrlString);
+            Assert.Equal(uri, rssUrl.UrlString);
         }
 
-        [TestMethod]
+        [Fact]
         public void SetString_ValidStringParameter_Ok()
         {
             // Arrange
@@ -62,10 +59,10 @@ namespace RSS.Test.Validators
             rssUrl.UrlString = uri;
 
             // Assert
-            Assert.AreEqual(uri, rssUrl.UrlString);
+            Assert.Equal(uri, rssUrl.UrlString);
         }
 
-        [TestMethod]
+        [Fact]
         public void SetUri_ConvertToString_String()
         {
             // Arrange
@@ -76,10 +73,10 @@ namespace RSS.Test.Validators
             rssUrl.UrlString = uri.AbsoluteUri;
 
             // Assert
-            Assert.AreEqual(uri, rssUrl.Url);
+            Assert.Equal(uri, rssUrl.Url);
         }
 
-        [TestMethod]
+        [Fact]
         public void SetString_ConvertToUri_Uri()
         {
             // Arrange
@@ -90,10 +87,10 @@ namespace RSS.Test.Validators
             rssUrl.Url = uri;
 
             // Assert
-            Assert.AreEqual(uri.AbsoluteUri, rssUrl.UrlString);
+            Assert.Equal(uri.AbsoluteUri, rssUrl.UrlString);
         }
 
-        [TestMethod]
+        [Fact]
         public void SetString_Null_UriNull()
         {
             // Arrange
@@ -103,10 +100,10 @@ namespace RSS.Test.Validators
             rssUrl.UrlString = null;
 
             // Assert
-            Assert.AreEqual(null, rssUrl.Url);
+            Assert.Equal(null, rssUrl.Url);
         }
 
-        [TestMethod]
+        [Fact]
         public void SetUri_Null_StringNull()
         {
             // Arrange
@@ -116,10 +113,10 @@ namespace RSS.Test.Validators
             rssUrl.Url = null;
 
             // Assert
-            Assert.AreEqual(null, rssUrl.UrlString);
+            Assert.Equal(null, rssUrl.UrlString);
         }
 
-        [TestMethod]
+        [Fact]
         public void SetString_InvalidUriFormat_Error()
         {
             // Arrange
@@ -138,10 +135,10 @@ namespace RSS.Test.Validators
             }
 
             // Assert
-            Assert.IsNotNull(e);
+            Assert.NotNull(e);
         }
 
-        [TestMethod]
+        [Fact]
         public void Ctor_InvalidUriFormat_Error()
         {
             // Arrange
@@ -159,7 +156,7 @@ namespace RSS.Test.Validators
             }
 
             // Assert
-            Assert.IsNotNull(e);
+            Assert.NotNull(e);
         }
     }
 }
