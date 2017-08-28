@@ -103,11 +103,3 @@ Complete rss object will looks like this:
                                         }
                     }
             };
-<<<<<<< HEAD
-=======
-
-
-## Features
-
-Resulted rss are valid for w3c rss validator located at http://validator.w3.org/feed/
->>>>>>> 3376c16b37f555ff2fef1728eb8932cbe7ff13fd
