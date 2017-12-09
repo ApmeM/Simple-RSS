@@ -95,14 +95,14 @@ namespace X.Web.RSS.Structure
         public string InternalLastBuildDate
         {
             get => LastBuildDate?.ToRFC822Date();
-            set => throw new System.NotSupportedException("Setting this property is not supported");
+            set => LastBuildDate = value?.FromRFC822Date();
         }
 
         [XmlElement("pubDate")]
         public string InternalPubDate
         {
             get => PubDate?.ToRFC822Date();
-            set => throw new System.NotSupportedException("Setting this property is not supported");
+            set => PubDate = value?.FromRFC822Date();
         }
 
         [XmlElement("ttl")]

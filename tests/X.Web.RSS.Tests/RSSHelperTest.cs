@@ -4,7 +4,6 @@ using System.Globalization;
 using System.IO;
 using System.Net;
 using System.Text;
-using X.Web.RSS;
 using X.Web.RSS.Enumerators;
 using X.Web.RSS.Structure;
 using X.Web.RSS.Structure.Validators;
@@ -61,7 +60,7 @@ namespace X.Web.RSS.Tests
 
             var rss = RssDocument.Load(stream);
 
-            Assert.Equal("News Center", rss.Channel.Title);
+            Assert.Equal("Stories", rss.Channel.Title);
             Assert.Equal("Microsoft news, features, events, and press materials", rss.Channel.Description);
         }
 

@@ -2,6 +2,7 @@ using Xunit;
 using System;
 using System.Globalization;
 using X.Web.RSS.Exceptions;
+using X.Web.RSS.Extensions;
 using X.Web.RSS.Structure.Validators;
 
 namespace X.Web.RSS.Tests.Validators
@@ -241,6 +242,18 @@ namespace X.Web.RSS.Tests.Validators
 
             // Assert
             Assert.NotNull(e);
+        }
+
+        [Fact]
+        public void DateExtensionTest()
+        {
+            var date = DateTime.Now;
+
+            var rfcDateInString = date.ToRFC822Date();
+            var parsedDate = rfcDateInString.FromRFC822Date();
+
+            Assert.Equal(date.ToLongDateString(), parsedDate.ToLongDateString());
+            Assert.Equal(date.ToLongTimeString(), parsedDate.ToLongTimeString());
         }
     }
 }
