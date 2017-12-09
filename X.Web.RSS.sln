@@ -1,11 +1,16 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26403.7
+VisualStudioVersion = 15.0.27004.2010
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "X.Web.RSS.Tests", "tests\X.Web.RSS.Tests\X.Web.RSS.Tests.csproj", "{100A2EBB-A674-4CBB-AA97-83811397C676}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "X.Web.RSS.Tests", "tests\X.Web.RSS.Tests\X.Web.RSS.Tests.csproj", "{100A2EBB-A674-4CBB-AA97-83811397C676}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "X.Web.RSS", "src\X.Web.RSS\X.Web.RSS.csproj", "{301677B9-1586-4043-90C3-52A164230723}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "X.Web.RSS", "src\X.Web.RSS\X.Web.RSS.csproj", "{301677B9-1586-4043-90C3-52A164230723}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{04A264AA-7673-4212-BA17-41E6D01500FD}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -24,6 +29,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {786AE275-FAEE-4D84-807D-90C66EBDD6B8}
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = cs-rss.vsmdi
