@@ -1,5 +1,5 @@
 # X.Web.RSS 
-[![Build status](https://ci.appveyor.com/api/projects/status/26yeb5o0y6d4r77v?svg=true)](https://ci.appveyor.com/project/ernado-x/X.Web.RSS)
+[![Build Status](https://dev.azure.com/AndrewGubskiy/NET%20Core%20Ukrainian%20User%20Group/_apis/build/status/dncuug.X.Web.RSS)](https://dev.azure.com/AndrewGubskiy/NET%20Core%20Ukrainian%20User%20Group/_build/latest?definitionId=6)
 [![NuGet version](https://badge.fury.io/nu/xwebrss.svg)](https://badge.fury.io/nu/xwebrss)
 [![Part of awesome .NET Core](https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg)](https://github.com/thangchung/awesome-dotnet-core#tools)
 
