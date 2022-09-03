@@ -1,4 +1,3 @@
-using X.Web.RSS.Exceptions;
 using X.Web.RSS.Structure.Validators;
 using Xunit;
 

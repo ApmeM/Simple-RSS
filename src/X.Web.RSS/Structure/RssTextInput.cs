@@ -10,8 +10,6 @@ namespace X.Web.RSS.Structure;
 /// </summary>
 public class RssTextInput
 {
-    #region Properties
-
     /// <summary>
     ///   Gets or sets explains the text input area.
     /// </summary>
@@ -35,6 +33,4 @@ public class RssTextInput
     /// </summary>
     [XmlElement("title")]
     public string Title { get; set; }
-
-    #endregion
 }

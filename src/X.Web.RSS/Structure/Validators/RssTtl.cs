@@ -6,15 +6,11 @@ namespace X.Web.RSS.Structure.Validators;
 
 public class RssTtl
 {
-    #region Constants and Fields
 
-    private int ttl;
+    private int _ttl;
 
-    private string ttlString;
+    private string _ttlString;
 
-    #endregion
-
-    #region Constructors and Destructors
 
     public RssTtl()
     {
@@ -22,42 +18,38 @@ public class RssTtl
 
     public RssTtl(string ttl)
     {
-        this.TTLString = ttl;
+        TTLString = ttl;
     }
 
     public RssTtl(int ttl)
     {
-        this.TTL = ttl;
+        TTL = ttl;
     }
 
-    #endregion
-
-    #region Properties
 
     [XmlIgnore]
     public int TTL
     {
         get
         {
-            return this.ttl;
+            return _ttl;
         }
-
         set
         {
             if (value < 0)
             {
-                throw new RSSParameterException(string.Format("{0}.ttl", this.GetType()), value);
+                throw new RSSParameterException($"{this.GetType()}.ttl", value);
             }
 
             if (value != 0)
             {
-                this.ttl = value;
-                this.ttlString = this.ttl.ToString();
+                _ttl = value;
+                _ttlString = _ttl.ToString();
             }
             else
             {
-                this.ttl = 0;
-                this.ttlString = null;
+                _ttl = 0;
+                _ttlString = null;
             }
         }
     }
@@ -67,12 +59,13 @@ public class RssTtl
     {
         get
         {
-            return this.ttlString;
+            return _ttlString;
         }
 
         set
         {
             int parseTtl = 0;
+            
             if (value != null)
             {
                 try
@@ -85,9 +78,7 @@ public class RssTtl
                 }
             }
 
-            this.TTL = parseTtl;
+            TTL = parseTtl;
         }
     }
-
-    #endregion
 }

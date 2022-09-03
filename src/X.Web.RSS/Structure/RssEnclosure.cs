@@ -1,12 +1,12 @@
 ﻿using System.Xml.Serialization;
+using JetBrains.Annotations;
 using X.Web.RSS.Structure.Validators;
 
 namespace X.Web.RSS.Structure;
 
+[PublicAPI]
 public class RssEnclosure
 {
-    #region Properties
-
     /// <summary>
     ///   Gets or sets length says how big it is in bytes
     /// </summary>
@@ -34,19 +34,10 @@ public class RssEnclosure
     [XmlIgnore]
     public RssUrl Url
     {
-        get
-        {
-            return new RssUrl(this.InternalUrl);
-        }
- 
-        set
-        {
-            this.InternalUrl = value.UrlString;
-        }
+        get => new RssUrl(InternalUrl);
+        set => InternalUrl = value.UrlString;
     }
 
     [XmlAttribute("url")]
     public string InternalUrl { get; set; }
-
-    #endregion
 }

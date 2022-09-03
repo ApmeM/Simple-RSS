@@ -28,11 +28,9 @@ public static class DateTimeExtensions
             int i = offset * -1;
             timeZone = "-" + i.ToString().PadLeft(2, '0');
         }
+        
         return timeZone;
     }
 
-    public static DateTime FromRFC822Date(this string date)
-    {
-        return DateTime.Parse(date);
-    }
+    public static DateTime FromRFC822Date(this string date) => DateTime.Parse(date);
 }

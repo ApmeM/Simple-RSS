@@ -10,16 +10,10 @@ namespace X.Web.RSS.Structure;
 /// </summary>
 public class RssGuid
 {
-    #region Constructors and Destructors
-
     public RssGuid()
     {
-        this.IsPermaLink = true;
+        IsPermaLink = true;
     }
-
-    #endregion
-
-    #region Properties
 
     /// <summary>
     ///   Gets or sets a value indicating whether if the guid element has an attribute named isPermaLink with a
@@ -43,6 +37,4 @@ public class RssGuid
     /// </example>
     [XmlText]
     public string Value { get; set; }
-
-    #endregion
 }

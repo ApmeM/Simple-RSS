@@ -49,15 +49,17 @@ public class RssDocument
     {
         var ms = new MemoryStream();
 
-        RssDocument.WriteRSS(this, ms);
+        WriteRSS(this, ms);
 
         //var xml = Encoding.UTF8.GetString(ms.GetBuffer()).Trim('\0');
-        System.ArraySegment<byte> buffer;
         var xml = String.Empty;
 
-        if (ms.TryGetBuffer(out buffer))
+        if (ms.TryGetBuffer(out var buffer))
         {
-            xml = Encoding.UTF8.GetString(buffer.Array).Trim('\0');
+            if (buffer.Array != null)
+            {
+                xml = Encoding.UTF8.GetString(buffer.Array).Trim('\0');
+            }
         }
 
         return xml;
@@ -70,19 +72,26 @@ public class RssDocument
     /// <returns>RssDocument</returns>
     public static async Task<RssDocument> Load(Uri url)
     {
-        var request = WebRequest.Create(url) as HttpWebRequest;
-        var response = await request.GetResponseAsync();
-            
-        var encoding = Encoding.ASCII;
-        var xml = String.Empty;
-
-        using (var reader = new System.IO.StreamReader(response.GetResponseStream(), encoding))
+        if (WebRequest.Create(url) is HttpWebRequest request)
         {
-            xml = reader.ReadToEnd();
-        }
+            var response = await request.GetResponseAsync();
+            
+            var encoding = Encoding.ASCII;
+            var xml = String.Empty;
+
+            var responseStream = response.GetResponseStream();
+            
+            using (var reader = new StreamReader(responseStream, encoding))
+            {
+                xml = await reader.ReadToEndAsync();
+            }
            
-        var rss = Load(xml);
-        return rss;
+            var rss = Load(xml);
+            
+            return rss;
+        }
+
+        return null;
     }
 
     public static RssDocument Load(string xml)

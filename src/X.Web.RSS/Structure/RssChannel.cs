@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Xml.Serialization;
+using JetBrains.Annotations;
 using X.Web.RSS.Extensions;
 using X.Web.RSS.Enumerators;
 using X.Web.RSS.Structure.Validators;
@@ -12,12 +13,13 @@ namespace X.Web.RSS.Structure;
 /// Subordinate to the 'rss' element is a single 'channel' element, 
 ///   which contains information about the channel (metadata) and its contents.
 /// </summary>
+[PublicAPI]
 public class RssChannel
 {
     public RssChannel()
     {
         Docs = "http://www.rssboard.org/rss-specification";
-        Generator = "ApmeM RSS Generator";
+        Generator = "RSS Generator";
         Items = new List<RssItem>();
         SkipDays = new List<Day>();
         SkipHours = new List<Hour>();
@@ -121,8 +123,8 @@ public class RssChannel
     [XmlIgnore]
     public CultureInfo Language
     {
-        get { return new CultureInfo(this.InternalLanguage); }
-        set { this.InternalLanguage = value.Name; }
+        get => new CultureInfo(InternalLanguage);
+        set => InternalLanguage = value.Name;
     }
 
     /// <summary>
@@ -217,15 +219,9 @@ public class RssChannel
     [XmlIgnore]
     public int TTL
     {
-        get
-        {
-            return new RssTtl(this.InternalTTL).TTL;
-        }
+        get => new RssTtl(InternalTTL).TTL;
 
-        set
-        {
-            this.InternalTTL = new RssTtl(value).TTLString;
-        }
+        set => InternalTTL = new RssTtl(value).TTLString;
     }
 
     /// <summary>

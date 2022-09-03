@@ -6,15 +6,9 @@ namespace X.Web.RSS.Structure.Validators;
 
 public class RssUrl
 {
-    #region Constants and Fields
+    private Uri _url;
 
-    private Uri url;
-
-    private string urlString;
-
-    #endregion
-
-    #region Constructors and Destructors
+    private string _urlString;
 
     public RssUrl()
     {
@@ -22,36 +16,33 @@ public class RssUrl
 
     public RssUrl(string newUrl)
     {
-        this.UrlString = newUrl;
+        UrlString = newUrl;
     }
 
     public RssUrl(Uri newUrl)
     {
-        this.Url = newUrl;
+        Url = newUrl;
     }
-
-    #endregion
-
-    #region Properties
 
     [XmlIgnore]
     public Uri Url
     {
         get
         {
-            return this.url;
+            return _url;
         }
 
         set
         {
-            this.url = value;
-            if (this.url == null)
+            _url = value;
+            
+            if (_url == null)
             {
-                this.urlString = null;
+                _urlString = null;
             }
             else
             {
-                this.urlString = this.url.AbsoluteUri;
+                _urlString = _url.AbsoluteUri;
             }
         }
     }
@@ -61,12 +52,13 @@ public class RssUrl
     {
         get
         {
-            return this.urlString;
+            return _urlString;
         }
 
         set
         {
             Uri parseUrl = null;
+            
             if (value != null)
             {
                 try
@@ -79,9 +71,7 @@ public class RssUrl
                 }
             }
 
-            this.Url = parseUrl;
+            Url = parseUrl;
         }
     }
-
-    #endregion
 }

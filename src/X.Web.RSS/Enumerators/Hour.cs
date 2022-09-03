@@ -19,13 +19,10 @@ public class Hour
     [XmlText]
     public byte Value
     {
-        get
-        {
-            return _value;
-        }
+        get => _value;
         set
         {
-            if (_value < 0 || _value > 23)
+            if (value < 0 || value > 23)
             {
                 throw new RSSParameterException("hour", value);
             }

@@ -12,10 +12,10 @@ public class RssUrlTest
     public void Ctor_ValidUriParameter_Ok()
     {
         // Arrange
-        Uri uri = new Uri("http://test.url.com");
+        var uri = new Uri("http://test.url.com");
 
         // Action
-        RssUrl rssUrl = new RssUrl(uri);
+        var rssUrl = new RssUrl(uri);
 
         // Assert
         Assert.Equal(uri, rssUrl.Url);

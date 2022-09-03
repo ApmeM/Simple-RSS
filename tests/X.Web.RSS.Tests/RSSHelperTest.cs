@@ -13,18 +13,6 @@ namespace X.Web.RSS.Tests;
 
 public class RSSHelperTest
 {
-    //[Fact]
-    //public void GetRSS_AllData_ValidRssXml()
-    //{
-    //    var ms = new MemoryStream();
-    //    var rss = GetFullRss();
-
-    //    RssDocument.WriteRSS(rss, ms);
-
-    //    var result = Encoding.UTF8.GetString(ms.GetBuffer()).Trim('\0');
-    //    Assert.Equal(GetFullRssText(), result);
-    //}
-
     [Fact]
     public void WriteRead_LargeObject_Ok()
     {
@@ -63,8 +51,7 @@ public class RSSHelperTest
         Assert.Equal("Stories", rss.Channel.Title);
         Assert.Equal("Microsoft news, features, events, and press materials", rss.Channel.Description);
     }
-
-
+    
     private static RssDocument GetFullRss()
     {
         return new RssDocument

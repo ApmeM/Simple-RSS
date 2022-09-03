@@ -17,8 +17,6 @@ namespace X.Web.RSS.Structure;
 /// </summary>
 public class RssItem
 {
-    #region Properties
-
     /// <summary>
     ///   Gets or sets email address of the author of the item.
     /// </summary>
@@ -96,6 +94,4 @@ public class RssItem
         get => PubDate?.ToRFC822Date();
         set => PubDate = value?.FromRFC822Date();
     }
-
-    #endregion
 }

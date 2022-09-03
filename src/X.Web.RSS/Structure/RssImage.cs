@@ -48,7 +48,7 @@ public class RssImage
         {
             if (_height > 400)
             {
-                throw new RSSParameterException("height", this._height);
+                throw new RSSParameterException("height", _height);
             }
 
             _height = value;

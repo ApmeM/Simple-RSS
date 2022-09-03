@@ -1,4 +1,5 @@
 ﻿using System.Xml.Serialization;
+using JetBrains.Annotations;
 using X.Web.RSS.Enumerators;
 using X.Web.RSS.Structure.Validators;
 
@@ -7,6 +8,7 @@ namespace X.Web.RSS.Structure;
 /// <summary>
 /// &lt;atom:link href = "http://bash.org.ru/rss/" rel = "self" type = "application/rss+xml" /&gt;
 /// </summary>
+[PublicAPI]
 public class RssLink
 {
     public RssLink()

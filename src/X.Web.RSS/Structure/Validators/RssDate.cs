@@ -23,9 +23,6 @@ public class RssDate
         Date = date;
     }
 
-  
-
-    #region Properties
 
     [XmlText]
     public string DateString
@@ -37,6 +34,7 @@ public class RssDate
         set
         {
             DateTime? parseDate = null;
+            
             if (!String.IsNullOrEmpty(value))
             {
                 try
@@ -49,20 +47,15 @@ public class RssDate
                 }
             }
 
-            this.Date = parseDate;
+            Date = parseDate;
         }
     }
 
     [XmlText]
-    public string DateStringISO8601
-    {
-        get
-        {
-            return Date.HasValue
-                ? Date.Value.ToString("yyyy-MM-ddTHH:mm:ss.Z", CultureInfo.InvariantCulture)
-                : DateString;
-        }
-    }
+    public string DateStringISO8601 =>
+        Date.HasValue
+            ? Date.Value.ToString("yyyy-MM-ddTHH:mm:ss.Z", CultureInfo.InvariantCulture)
+            : DateString;
 
     [XmlIgnore]
     public DateTime? Date
@@ -84,6 +77,4 @@ public class RssDate
             _date = value;
         }
     }
-
-    #endregion
 }

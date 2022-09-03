@@ -1,5 +1,3 @@
-using System;
-using System.Globalization;
 using X.Web.RSS.Exceptions;
 using X.Web.RSS.Structure.Validators;
 using Xunit;

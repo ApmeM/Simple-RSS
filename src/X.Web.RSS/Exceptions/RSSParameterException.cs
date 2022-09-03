@@ -1,44 +1,37 @@
 ﻿using System;
 using System.Runtime.Serialization;
+using JetBrains.Annotations;
 
 namespace X.Web.RSS.Exceptions;
 
 public class RSSParameterException : Exception
 {
-    private readonly string field;
-
-    private readonly object value;
-
     private const string MessageText = "RSSParameterException field '{0}', value '{1}'";
 
     public RSSParameterException(string field, object value)
         : base(string.Format(MessageText, field, value))
     {
-        this.field = field;
-        this.value = value;
+        Field = field;
+        Value = value;
     }
 
     public RSSParameterException(string field, object value, Exception innerException)
         : base(string.Format(MessageText, field, value), innerException)
     {
-        this.field = field;
-        this.value = value;
+        Field = field;
+        Value = value;
     }
 
     protected RSSParameterException(SerializationInfo info, StreamingContext context, string field, object value)
-        //: base(info, context)
+        : base(info, context)
     {
-        this.field = field;
-        this.value = value;
+        Field = field;
+        Value = value;
     }
 
-    public string Field
-    {
-        get { return this.field; }
-    }
+    [PublicAPI]
+    public string Field { get; }
 
-    public object Value
-    {
-        get { return this.value; }
-    }
+    [PublicAPI]
+    public object Value { get; }
 }

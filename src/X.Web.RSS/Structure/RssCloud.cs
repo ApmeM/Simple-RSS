@@ -12,8 +12,6 @@ namespace X.Web.RSS.Structure;
 /// </summary>
 public class RssCloud
 {
-    #region Properties
-
     /// <summary>
     ///   Gets or sets a list of URLs of RSS documents that the client seeks to monitor
     /// </summary>
@@ -61,6 +59,4 @@ public class RssCloud
     /// </example>
     [XmlAttribute("registerProcedure")]
     public string RegisterProcedure { get; set; }
-
-    #endregion
 }
