@@ -14,6 +14,7 @@ public static class DateTimeExtensions
         var timeZone = GetTimeZone();
 
         var result = date.ToString("ddd, dd MMM yyyy HH:mm:ss " + timeZone.PadRight(5, '0'));
+        
         return result;
     }
 
@@ -25,7 +26,7 @@ public static class DateTimeExtensions
 
         if (offset < 0)
         {
-            int i = offset * -1;
+            var i = offset * -1;
             timeZone = "-" + i.ToString().PadLeft(2, '0');
         }
         

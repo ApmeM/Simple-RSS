@@ -31,7 +31,6 @@ public class RssUrl
         {
             return _url;
         }
-
         set
         {
             _url = value;
@@ -54,7 +53,6 @@ public class RssUrl
         {
             return _urlString;
         }
-
         set
         {
             Uri parseUrl = null;

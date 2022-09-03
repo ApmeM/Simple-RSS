@@ -13,6 +13,11 @@ namespace X.Web.RSS.Structure;
 [PublicAPI]
 public class RssSource
 {
+    public RssSource()
+    {
+        InternalUrl = "";
+    }
+    
     [XmlIgnore]
     public RssUrl Url
     {

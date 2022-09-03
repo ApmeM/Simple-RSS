@@ -6,6 +6,7 @@ public class RssPerson
 {
     public RssPerson()
     {
+        Value = "";
     }
 
     public RssPerson(string name, string email)

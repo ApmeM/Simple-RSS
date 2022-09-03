@@ -70,32 +70,40 @@ public class RssDocument
     /// </summary>
     /// <param name="url">The URL.</param>
     /// <returns>RssDocument</returns>
-    public static async Task<RssDocument> Load(Uri url)
+    public static async Task<RssDocument?> Load(Uri url)
     {
         if (WebRequest.Create(url) is HttpWebRequest request)
         {
             var response = await request.GetResponseAsync();
-            
+
             var encoding = Encoding.ASCII;
             var xml = String.Empty;
 
             var responseStream = response.GetResponseStream();
-            
-            using (var reader = new StreamReader(responseStream, encoding))
+
+            if (responseStream != null)
             {
-                xml = await reader.ReadToEndAsync();
+                using (var reader = new StreamReader(responseStream, encoding))
+                {
+                    xml = await reader.ReadToEndAsync();
+                }
             }
-           
+
             var rss = Load(xml);
-            
+
             return rss;
         }
 
         return null;
     }
 
-    public static RssDocument Load(string xml)
+    public static RssDocument? Load(string xml)
     {
+        if (string.IsNullOrWhiteSpace(xml))
+        {
+            return null;
+        }
+        
         var writer = new StreamWriter(new MemoryStream());
         writer.Write(xml);
         writer.Flush();
