@@ -1,8 +1,7 @@
-namespace X.Web.RSS.Enumerators
+namespace X.Web.RSS.Enumerators;
+
+public enum Rel
 {
-    public enum Rel
-    {
-        self,
-        alternate
-    }
+    self,
+    alternate
 }

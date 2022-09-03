@@ -1,6 +1,5 @@
-namespace X.Web.RSS.Exceptions
+namespace X.Web.RSS.Exceptions;
+
+public class SerializationInfo
 {
-    public class SerializationInfo
-    {
-    }
 }
