@@ -3,15 +3,14 @@ namespace RSS.Test.Validators
     using System;
     using System.Globalization;
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Xunit;
 
     using RSS.Exceptions;
     using RSS.Structure.Validators;
 
-    [TestClass]
     public class RssDateTest
     {
-        [TestMethod]
+        [Fact]
         public void Ctor_ValidDateParameter_Ok()
         {
             // Arrange
@@ -21,10 +20,10 @@ namespace RSS.Test.Validators
             RssDate rssDate = new RssDate(date);
 
             // Assert
-            Assert.AreEqual(date, rssDate.Date);
+            Assert.Equal(date, rssDate.Date);
         }
 
-        [TestMethod]
+        [Fact]
         public void Ctor_DateInFuture_Error()
         {
             // Arrange
@@ -42,10 +41,10 @@ namespace RSS.Test.Validators
             }
 
             // Assert
-            Assert.IsNotNull(e);
+            Assert.NotNull(e);
         }
 
-        [TestMethod]
+        [Fact]
         public void SetDate_ValidDateParameter_Ok()
         {
             // Arrange
@@ -56,10 +55,10 @@ namespace RSS.Test.Validators
             rssDate.Date = date;
 
             // Assert
-            Assert.AreEqual(date, rssDate.Date);
+            Assert.Equal(date, rssDate.Date);
         }
 
-        [TestMethod]
+        [Fact]
         public void SetDate_DateInFuture_Error()
         {
             // Arrange
@@ -78,10 +77,10 @@ namespace RSS.Test.Validators
             }
 
             // Assert
-            Assert.IsNotNull(e);
+            Assert.NotNull(e);
         }
 
-        [TestMethod]
+        [Fact]
         public void Ctor_ValidStringParameter_Ok()
         {
             // Arrange
@@ -91,10 +90,10 @@ namespace RSS.Test.Validators
             RssDate rssDate = new RssDate(date);
 
             // Assert
-            Assert.AreEqual(date, rssDate.DateString);
+            Assert.Equal(date, rssDate.DateString);
         }
 
-        [TestMethod]
+        [Fact]
         public void Ctor_StringInFuture_Error()
         {
             // Arrange
@@ -112,10 +111,10 @@ namespace RSS.Test.Validators
             }
 
             // Assert
-            Assert.IsNotNull(e);
+            Assert.NotNull(e);
         }
 
-        [TestMethod]
+        [Fact]
         public void SetString_ValidStringParameter_Ok()
         {
             // Arrange
@@ -126,10 +125,10 @@ namespace RSS.Test.Validators
             rssDate.DateString = date;
 
             // Assert
-            Assert.AreEqual(date, rssDate.DateString);
+            Assert.Equal(date, rssDate.DateString);
         }
 
-        [TestMethod]
+        [Fact]
         public void SetString_StringInFuture_Error()
         {
             // Arrange
@@ -148,10 +147,10 @@ namespace RSS.Test.Validators
             }
 
             // Assert
-            Assert.IsNotNull(e);
+            Assert.NotNull(e);
         }
 
-        [TestMethod]
+        [Fact]
         public void SetDate_ConvertToString_String()
         {
             // Arrange
@@ -162,10 +161,10 @@ namespace RSS.Test.Validators
             rssDate.DateString = date.ToString("R");
 
             // Assert
-            Assert.AreEqual(date, rssDate.Date);
+            Assert.Equal(date, rssDate.Date);
         }
 
-        [TestMethod]
+        [Fact]
         public void SetString_ConvertToDate_Date()
         {
             // Arrange
@@ -176,10 +175,10 @@ namespace RSS.Test.Validators
             rssDate.Date = date;
 
             // Assert
-            Assert.AreEqual(date.ToString("R"), rssDate.DateString);
+            Assert.Equal(date.ToString("R"), rssDate.DateString);
         }
 
-        [TestMethod]
+        [Fact]
         public void SetString_Null_DateNull()
         {
             // Arrange
@@ -189,10 +188,10 @@ namespace RSS.Test.Validators
             rssDate.DateString = null;
 
             // Assert
-            Assert.AreEqual(null, rssDate.Date);
+            Assert.Null(rssDate.Date);
         }
 
-        [TestMethod]
+        [Fact]
         public void SetDate_Null_StringNull()
         {
             // Arrange
@@ -202,10 +201,10 @@ namespace RSS.Test.Validators
             rssDate.Date = null;
 
             // Assert
-            Assert.AreEqual(null, rssDate.DateString);
+            Assert.Null(rssDate.DateString);
         }
 
-        [TestMethod]
+        [Fact]
         public void SetString_InvalidDateFormat_Error()
         {
             // Arrange
@@ -224,10 +223,10 @@ namespace RSS.Test.Validators
             }
 
             // Assert
-            Assert.IsNotNull(e);
+            Assert.NotNull(e);
         }
 
-        [TestMethod]
+        [Fact]
         public void Ctor_InvalidDateFormat_Error()
         {
             // Arrange
@@ -245,7 +244,7 @@ namespace RSS.Test.Validators
             }
 
             // Assert
-            Assert.IsNotNull(e);
+            Assert.NotNull(e);
         }
     }
 }

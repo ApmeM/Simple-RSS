@@ -1,14 +1,13 @@
 namespace RSS.Test.Validators
 {
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+     using Xunit;
 
     using RSS.Exceptions;
     using RSS.Structure.Validators;
 
-    [TestClass]
     public class RssEmailTest
     {
-        [TestMethod]
+        [Fact]
         public void Ctor_ValidEmailParameter_Ok()
         {
             // Arrange
@@ -18,10 +17,10 @@ namespace RSS.Test.Validators
             RssEmail rssEmail = new RssEmail(Email);
 
             // Assert
-            Assert.AreEqual(Email, rssEmail.Email);
+            Assert.Equal(Email, rssEmail.Email);
         }
 
-        [TestMethod]
+        [Fact]
         public void Ctor_InvalidEmail_Error()
         {
             // Arrange
@@ -39,10 +38,10 @@ namespace RSS.Test.Validators
             }
 
             // Assert
-            Assert.IsNotNull(e);
+            Assert.NotNull(e);
         }
 
-        [TestMethod]
+        [Fact]
         public void SetEmail_ValidDateParameter_Ok()
         {
             // Arrange
@@ -53,10 +52,10 @@ namespace RSS.Test.Validators
             rssEmail.Email = Email;
 
             // Assert
-            Assert.AreEqual(Email, rssEmail.Email);
+            Assert.Equal(Email, rssEmail.Email);
         }
 
-        [TestMethod]
+        [Fact]
         public void SetEmail_InvalidEmail_Error()
         {
             // Arrange
@@ -75,10 +74,10 @@ namespace RSS.Test.Validators
             }
 
             // Assert
-            Assert.IsNotNull(e);
+            Assert.NotNull(e);
         }
 
-        [TestMethod]
+        [Fact]
         public void SetString_Null_StringNull()
         {
             // Arrange
@@ -88,7 +87,7 @@ namespace RSS.Test.Validators
             rssEmail.Email = null;
 
             // Assert
-            Assert.AreEqual(null, rssEmail.Email);
+            Assert.Null(rssEmail.Email);
         }
     }
 }

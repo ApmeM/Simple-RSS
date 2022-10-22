@@ -9,7 +9,7 @@
     using System.Net;
     using System.Text;
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Xunit;
 
     using RSS.Enumerators;
     using RSS.Structure;
@@ -17,12 +17,11 @@
 
     #endregion
 
-    [TestClass]
     public class RSSHelperTest
     {
         #region Public Methods
 
-        [TestMethod]
+        [Fact]
         public void GetRSS_AllData_ValidRssXml()
         {
             MemoryStream ms = new MemoryStream();
@@ -31,10 +30,10 @@
             RSSHelper.WriteRSS(rss, ms);
 
             var result = Encoding.UTF8.GetString(ms.GetBuffer()).Trim('\0');
-            Assert.AreEqual(GetFullRSSText(), result);
+            Assert.Equal(GetFullRSSText(), result);
         }
 
-        [TestMethod]
+        [Fact]
         public void WriteRead_LargeObject_Ok()
         {
             MemoryStream ms = new MemoryStream();
@@ -44,10 +43,10 @@
             ms.Position = 0;
             Rss newRss = RSSHelper.ReadRSS(ms);
 
-            Assert.AreEqual(rss.Channel.Description, newRss.Channel.Description);
+            Assert.Equal(rss.Channel.Description, newRss.Channel.Description);
         }
 
-        [TestMethod]
+        [Fact]
         public void Read_External_Ok()
         {
             MemoryStream ms = new MemoryStream();
@@ -56,12 +55,12 @@
             ms.Position = 0;
 
             Rss rss = RSSHelper.ReadRSS(ms);
-            Assert.AreEqual("channel title", rss.Channel.Title);
-            Assert.AreEqual("long description", rss.Channel.Description);
+            Assert.Equal("channel title", rss.Channel.Title);
+            Assert.Equal("long description", rss.Channel.Description);
         }
 
 /*
-        [TestMethod]
+        [Fact]
         public void Test()
         {
             var request = WebRequest.Create("http://bash.org.ru/rss/");
@@ -70,8 +69,8 @@
 
             Rss rss = RSSHelper.ReadRSS(stream);
 
-            Assert.AreEqual("Bash.Org.Ru", rss.Channel.Title);
-            Assert.AreEqual("Цитатник Рунета", rss.Channel.Description);
+            Assert.Equal("Bash.Org.Ru", rss.Channel.Title);
+            Assert.Equal("Цитатник Рунета", rss.Channel.Description);
         }
 */
 
@@ -82,7 +81,7 @@
                 Channel =
                     new RssChannel
                     {
-                        AtomLink = new RssLink { Href = new RssUrl("http://atomlink.com"), Rel = Rel.self, Type = "text/plain" },
+                        AtomLink = new RssLink { Href = new RssUrl("http://atomlink.com"), Rel = Rel.Self, Type = "text/plain" },
                         Category = "category",
                         Cloud =
                             new RssCloud
@@ -160,7 +159,7 @@
         {
             return
 @"<?xml version=""1.0""?>
-<rss xmlns:content=""http://purl.org/rss/1.0/modules/content/"" xmlns:atom=""http://www.w3.org/2005/Atom"" xmlns:dc=""http://purl.org/dc/elements/1.1/"" version=""2.0"">
+<rss xmlns:atom=""http://www.w3.org/2005/Atom"" xmlns:dc=""http://purl.org/dc/elements/1.1/"" xmlns:content=""http://purl.org/rss/1.0/modules/content/"" version=""2.0"">
   <channel>
     <atom:link rel=""self"" type=""text/plain"" href=""http://atomlink.com/"" />
     <category>category</category>
