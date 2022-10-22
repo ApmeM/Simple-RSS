@@ -10,7 +10,7 @@
     #endregion
 
     /// <summary>
-    /// &lt;atom:link href = "http://bash.org.ru/rss/" rel = "self" type = "application/rss+xml" /&gt;
+    /// &lt;atom:link href = "http://example.org/rss/" rel = "self" type = "application/rss+xml" /&gt;
     /// </summary>
     public class RssLink
     {

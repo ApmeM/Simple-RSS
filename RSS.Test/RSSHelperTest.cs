@@ -59,21 +59,6 @@
             Assert.Equal("long description", rss.Channel.Description);
         }
 
-/*
-        [Fact]
-        public void Test()
-        {
-            var request = WebRequest.Create("http://bash.org.ru/rss/");
-            var response = request.GetResponse();
-            var stream = response.GetResponseStream();
-
-            Rss rss = RSSHelper.ReadRSS(stream);
-
-            Assert.Equal("Bash.Org.Ru", rss.Channel.Title);
-            Assert.Equal("Цитатник Рунета", rss.Channel.Description);
-        }
-*/
-
         private static Rss GetFullRSS()
         {
             return new Rss

@@ -34,7 +34,7 @@
         #region Properties
 
         /// <summary>
-        ///   Gets or sets &lt;atom:link href = "http://bash.org.ru/rss/" rel = "self" type = "application/rss+xml" /&gt;
+        ///   Gets or sets &lt;atom:link href = "http://example/rss/" rel = "self" type = "application/rss+xml" /&gt;
         /// </summary>
         [XmlElement("link", Namespace = "http://www.w3.org/2005/Atom")]
         public RssLink AtomLink { get; set; }
