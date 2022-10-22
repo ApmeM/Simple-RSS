@@ -1,6 +1,8 @@
-name: Build
+name: Pack
 
-on: push
+on:
+  push:
+    tags: v*
   
 jobs:
   build:
@@ -23,7 +25,7 @@ jobs:
       run: dotnet test --verbosity normal
 
     - name: Pack with nuget
-      run: dotnet pack --configuration=Release -o ../artifacts/
+      run: dotnet pack --configuration=Release -p:PackageVersion=${GITHUB_REF:11} -o ../artifacts/
 
     - name: Upload artifact
       uses: actions/upload-artifact@v1
@@ -39,3 +41,10 @@ jobs:
     - name: Setup nuget config
       run: nuget sources add -name github -source "https://nuget.pkg.github.com/apmem/index.json" -username ${{ github.actor }} -password ${{ secrets.GITHUB_TOKEN }}
 
+    - name: Upload to GitHub Packages
+      run: |
+           for f in ./artifacts/*.nupkg
+           do
+             nuget push $f -Source "github"
+           done
+      shell: bash
